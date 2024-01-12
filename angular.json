@@ -95,10 +95,5 @@
     }
   },
   "cli": {
-    "analytics": false,
-    "schematicCollections": [
-    ]
-  },
-  "schematics": {
   }
 }
