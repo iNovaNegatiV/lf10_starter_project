@@ -19,7 +19,7 @@ services:
 
   employee:
     container_name: employee
-    image: berndheidemann/employee-management-service:1.0.4
+    image: berndheidemann/employee-management-service:1.1.1
     #    image: berndheidemann/employee-management-service_without_keycloak:1.1
     environment:
       spring.datasource.url: jdbc:postgresql://postgres-employee:5432/employee_db
