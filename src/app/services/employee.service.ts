@@ -7,7 +7,7 @@ import { Bearer } from '../entitys/Bearer';
 @Injectable({
   providedIn: 'root',
 })
-export class AxiosService {
+export class EmployeeService {
 
   authenticationUrl: string = "http://authproxy.szut.dev";
   baseUrl: string = "http://localhost:8089/";
@@ -18,22 +18,9 @@ export class AxiosService {
 
   public async setBearer(): Promise<void> {
 
-    const localBearer = localStorage.getItem('bearer');
-
-    // Checks for localStoorage bearer
-    if(localBearer) {
-      let myBearer: Bearer = JSON.parse(localBearer);
-      // Check Bearer
-      if(myBearer.timestamp) {
-        const currentDate = new Date();
-        const previousDate = new Date(myBearer.timestamp);
-        const dif = (currentDate.getTime() - previousDate.getTime()) / 1000;
-        if(Math.ceil(dif) < Number(myBearer.expires_in)) {
-          this.bearer = myBearer;
-          console.log("Keep localStorage bearer!");
-          return;
-        }
-      }
+    // Check if bearer exists
+    if(this.hasActiveBearer()) {
+      return;
     }
 
     let body: URLSearchParams = new URLSearchParams();
@@ -51,6 +38,28 @@ export class AxiosService {
       this.bearer = result;
       localStorage.setItem('bearer', JSON.stringify(this.bearer));
     });
+  }
+
+  public hasActiveBearer(): boolean {
+
+    const localBearer = localStorage.getItem('bearer');
+
+    // Checks for localStoorage bearer
+    if(localBearer) {
+      let myBearer: Bearer = JSON.parse(localBearer);
+      // Check Bearer
+      if(myBearer.timestamp) {
+        const currentDate = new Date();
+        const previousDate = new Date(myBearer.timestamp);
+        const dif = (currentDate.getTime() - previousDate.getTime()) / 1000;
+        if(Math.ceil(dif) < Number(myBearer.expires_in)) {
+          this.bearer = myBearer;
+          console.log("Keep localStorage bearer!");
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public getAllEmployees(): Observable<Employee[]> {

@@ -1,0 +1,17 @@
+.entry {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+button {
+  color: #bf2133;
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+}
+
+button:hover {
+  color: #ec4457;
+  cursor: pointer;
+}
