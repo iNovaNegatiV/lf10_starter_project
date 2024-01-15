@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { EmployeeService } from './employee.service';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
 @Injectable({
   'providedIn': 'root'
 })
-export class AuthGuard {
-  constructor(
-    private employeeService: EmployeeService,
-    private router: Router
-  ) {}
+export class AuthGuard extends KeycloakAuthGuard {
 
-  canActivate(): boolean {
-    if(this.employeeService.hasActiveBearer()) {
-      return true;
+  constructor(
+    protected override readonly router: Router,
+    protected readonly keycloak: KeycloakService
+  ) {
+    super(router, keycloak);
+  }
+
+  async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
+    if (!this.authenticated) {
+      await this.keycloak.login({
+        redirectUri: window.location.origin + state.url,
+      });
     }
-    this.router.navigate(['/']);
-    return false;
+    return this.authenticated;
   }
 }
