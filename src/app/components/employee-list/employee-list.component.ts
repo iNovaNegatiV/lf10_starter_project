@@ -2,9 +2,9 @@ import {  Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Observable, of} from "rxjs";
 import {Employee} from "../../entitys/Employee";
-import { AxiosService } from '../../services/employee.service';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -16,7 +16,7 @@ import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 export class EmployeeListComponent implements OnInit {
   employees$: Observable<Employee[]>;
 
-  constructor(private service: AxiosService) {
+  constructor(private service: EmployeeService) {
     this.employees$ = of([]);
   }
 
