@@ -1,0 +1,11 @@
+.teaser-img {
+  height: 400px;
+  width: 100% !important;
+  object-fit: cover;
+  object-position: 10% center;
+}
+
+.blur {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
