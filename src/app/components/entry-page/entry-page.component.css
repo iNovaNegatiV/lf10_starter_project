@@ -4,14 +4,14 @@
   width: 100%;
 }
 
-button {
+a {
   color: #bf2133;
   text-decoration: underline;
   background: transparent;
   border: none;
 }
 
-button:hover {
+a:hover {
   color: #ec4457;
   cursor: pointer;
 }
