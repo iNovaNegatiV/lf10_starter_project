@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-text-media',
+  selector: 'text-media-content',
   standalone: true,
   imports: [
     CommonModule,

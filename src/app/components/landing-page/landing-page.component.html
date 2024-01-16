@@ -1,8 +1,4 @@
 <div class="d-flex flex-column">
-  <div class="bg-dark d-flex flex-row align-items-center justify-content-center gap-5">
-    <img alt="company-icon" width="150" height="100" src="../../../assets/logo-transparent.png" />
-    <h1 class="flex-fill text-light text-decoration-underline">HiTec GmbH</h1>
-  </div>
   <div class="position-relative">
     <img class="teaser-img" alt="startup-buero" width="100%" src="../../../assets/startup-buero.png" />
     <div class="blur position-absolute top-0 left-0 w-100 h-100"></div>
@@ -13,18 +9,18 @@
       <h2>Die HiTec GmbH</h2>
     </div>
     <div class="d-flex flex-column align-items-center gap-5">
-      <app-text-media
+      <text-media-content
         [headline]="'Wer sind wir?'"
         [text]="'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'"
         [image]="'../../../assets/web.jpg'"
       />
-      <app-text-media
+      <text-media-content
         [headline]="'Was tun wir?'"
         [text]="'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'"
         [image]="'../../../assets/web.jpg'"
         [reverse]="true"
       />
-      <app-text-media
+      <text-media-content
         [headline]="'Unser Employee Management Service'"
         [text]="'Für unsere Mitarbeiter der HiTec GmbH haben wir einen Employee Management Service kreiert, hierüber können die Fähigkeiten der Mitarbeiter und deren Daten verwaltet werden. Um zum Tool zu gelangen folgend Sie bitten diesem Link und melden Sie sich bei unserem Keycloak Service an.'"
         [routeLabel]="'Link zum tool'"
