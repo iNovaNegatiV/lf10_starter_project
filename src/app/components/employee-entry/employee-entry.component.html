@@ -1,11 +1,8 @@
-<div class="d-flex flex-row border-dotted p-2 align-items-center justify-content-start w-75 m-auto mt-1">
-  <button class="d-flex align-items-center text-center">
-    <mat-icon>remove_red_eye</mat-icon>
+<div class="d-flex flex-row border-dotted p-2 mt-1">
+  <button class="d-flex flex-fill align-items-center bg-transparent border-0 text-light">
+    <p class="p-2 m-0">{{employee?.firstName}} {{employee?.lastName}}</p>
   </button>
-  <div class="d-flex flex-fill align-items-center">
-    <p class="p-2">{{employee?.firstName}} {{employee?.lastName}}</p>
-  </div>
-  <button class="d-flex align-items-center text-center">
+  <button class="d-flex align-items-center text-center bg-transparent border-0">
     <mat-icon>delete</mat-icon>
   </button>
 </div>
