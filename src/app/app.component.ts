@@ -1,22 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import {EmployeeListComponent} from "./components/employee-list/employee-list.component";
-import { AxiosService } from './services/employee.service';
-import { HttpClientModule } from '@angular/common/http';
-import { EmployeeEntry } from './components/employee-entry/employee-entry.component';
+import {  EmployeeService } from './services/employee.service';
+import { EmployeeServiceHeaderComponent } from './components/shared/employee-service-header/employee-service-header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    EmployeeListComponent,
-    HttpClientModule,
-    RouterModule
+    RouterModule,
+    EmployeeServiceHeaderComponent,
   ],
   providers: [
-    AxiosService
+    EmployeeService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

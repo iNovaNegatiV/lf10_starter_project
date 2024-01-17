@@ -1,0 +1,7 @@
+a, a:active, a:focus, a:visited {
+  color: #b83333;
+}
+
+a:hover {
+  color: #ff7878;
+}
