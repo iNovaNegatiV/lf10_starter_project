@@ -1,13 +1,19 @@
-<div class="content-wrapper">
-  <div class="view-head">
-    <h1>Mitarbeiter-Übersicht</h1>
-    <a>Fähigkeiten</a>
+<div class="d-flex flex-column m-4">
+  <h2 class="">Übersicht</h2>
+  <button class="align-self-end bg-transparent">Fahigkeiten</button>
+  <div class="d-flex flex-row w-100 pt-3 pb-3">
+    <button class="d-flex flex-row align-items-center justify-content-center bg-transparent w-25">
+      <p class="m-0">Filter</p><mat-icon class="fs-1">keyboard_arrow_down</mat-icon>
+    </button>
+    <div class="flex-fill"></div>
+    <button class="d-flex align-items-center justify-content-center bg-transparent">
+      <mat-icon>person_add</mat-icon>
+    </button>
   </div>
-  <div class="content-head">
-    <div class="filter"></div>
-    <a><mat-icon>person_add</mat-icon></a>
-  </div>
-  <div class="content-body">
-    <app-employee-entry *ngFor="let employee of employees$ | async" [employee]="employee" />
+  <div class="d-flex flex-column border-dotted text-light bg-secondary p-2 w-100 m-auto">
+    <app-employee-entry
+      *ngFor="let employee of employees$ | async"
+      [employee]="employee"
+    />
   </div>
 </div>
