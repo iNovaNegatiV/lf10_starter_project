@@ -19,4 +19,12 @@ export class TextMediaComponent {
   @Input() routeLink?: string;
   @Input() image?: string;
   @Input() reverse: boolean = false;
+
+  public isMobile: boolean = false;
+
+  constructor() {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      this.isMobile = true;
+    }
+  }
 }
