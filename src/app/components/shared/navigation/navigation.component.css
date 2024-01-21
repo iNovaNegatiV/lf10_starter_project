@@ -1,0 +1,42 @@
+.small-menu-icon {
+  transform: scale(2);
+}
+
+.big-menu {
+  right: -75%;
+  transition: right .5s ease;
+  max-width: 400px;
+  z-index: 2;
+}
+
+.big-menu-icon {
+  transform: scale(1.5);
+}
+
+.open {
+  right: 0;
+}
+
+.navigation-list > li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bg-blur {
+  background-color: transparent;
+  z-index: 1;
+  height: 0;
+  transition: background .5s ease;
+}
+
+.blur-active {
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, .75) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.route {
+  color: #5c65a5;
+  text-decoration: underline;
+}
+

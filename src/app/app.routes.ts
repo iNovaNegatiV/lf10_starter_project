@@ -7,7 +7,7 @@ import { AuthGuard } from './services/authguard.guard';
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {
-    path: 'list',
+    path: 'employees',
     component: EmployeeListComponent,
     canActivate: [AuthGuard]
   }
