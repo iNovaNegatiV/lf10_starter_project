@@ -1,4 +1,4 @@
-<div *ngIf="!isMobile; else mobileVersion" class="d-flex w-75 m-auto gap-5" [ngClass]="reverse ? 'flex-row' : 'flex-row-reverse'">
+<div *ngIf="!mobile; else mobileVersion" class="d-flex w-75 m-auto gap-5" [ngClass]="reverse ? 'flex-row' : 'flex-row-reverse'">
   <div class="d-flex flex-column w-50" [ngClass]="reverse ? 'align-items-start' : ''">
     <h2 class="">{{headline}}</h2>
     <p class="">{{text}}</p>
