@@ -48,6 +48,14 @@ export class EmployeeDetailsComponent {
   }
 
   toggleEdit() {
+    if (this.editing) {
+      // Save changes
+      this.employeeService
+        .updateEmployee(this.selectedEmployee)
+        .subscribe((employee) => {
+          this.selectedEmployee = employee;
+        });
+    }
     this.editing = !this.editing;
   }
 }

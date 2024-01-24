@@ -25,13 +25,42 @@ export class EmployeeService {
 
   public getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.baseUrl + 'employees', {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`),
+      headers: this.getHeaders(),
     });
   }
 
   setElectEmployee(employee: Employee | null) {
     this.selectedEmployeeSubject.next(employee);
+  }
+
+  updateEmployee(employee: Employee): Observable<Employee> {
+    const skills: number[] = [];
+    if (employee.skillset) {
+      for (const element of employee.skillset) {
+        skills.push(element.id);
+      }
+    }
+    return this.http.put<Employee>(
+      this.baseUrl + 'employees/' + employee.id,
+      {
+        id: employee.id,
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        street: employee.street,
+        postcode: employee.postcode,
+        city: employee.city,
+        phone: employee.phone,
+        skillset: skills,
+      },
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+
+  getHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.bearer}`);
   }
 }
