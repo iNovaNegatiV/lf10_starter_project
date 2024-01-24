@@ -34,6 +34,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   goToDetails(employee: Employee) {
+    this.service.setElectEmployee(employee);
     this.router.navigate(['/employees', employee.id]);
   }
 }
