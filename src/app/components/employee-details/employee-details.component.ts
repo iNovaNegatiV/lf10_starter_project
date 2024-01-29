@@ -78,4 +78,8 @@ export class EmployeeDetailsComponent {
 
     return skillset.map((skill) => skill.skill).join(', ');
   }
+
+  navigateToEmployeeSkills() {
+    //this.router.navigate([]);
+  }
 }
