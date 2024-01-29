@@ -29,17 +29,11 @@ export class EmployeeService {
     });
   }
 
-  setElectEmployee(employee: Employee | null) {
+  setSelectEmployee(employee: Employee | null) {
     this.selectedEmployeeSubject.next(employee);
   }
 
   updateEmployee(employee: Employee): Observable<Employee> {
-    const skills: number[] = [];
-    if (employee.skillset) {
-      for (const element of employee.skillset) {
-        skills.push(element.id);
-      }
-    }
     return this.http.put<Employee>(
       this.baseUrl + 'employees/' + employee.id,
       {
@@ -50,7 +44,6 @@ export class EmployeeService {
         postcode: employee.postcode,
         city: employee.city,
         phone: employee.phone,
-        skillset: skills,
       },
       {
         headers: this.getHeaders(),

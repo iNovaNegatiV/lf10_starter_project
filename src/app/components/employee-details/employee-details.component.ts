@@ -50,7 +50,7 @@ export class EmployeeDetailsComponent {
   }
 
   ngOnDestroy() {
-    this.employeeService.setElectEmployee(null);
+    this.employeeService.setSelectEmployee(null);
     this.destroy$.next(true);
     this.destroy$.complete();
   }
