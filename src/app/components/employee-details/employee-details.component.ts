@@ -19,6 +19,7 @@ export class EmployeeDetailsComponent {
   destroy$ = new Subject();
   selectedEmployee: Employee = new Employee();
   editing = false;
+  skills: any[] = [];
 
   constructor(
     private employeeService: EmployeeService,
@@ -34,7 +35,18 @@ export class EmployeeDetailsComponent {
         }
 
         this.selectedEmployee = employee;
+
+        // Fetch skills for the selected employee
+        if (employee.id) {
+          this.employeeService
+            .getEmployeeQualifications(employee.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((qualifications) => {
+              this.skills = qualifications.skillSet || [];
+            });
+        }
       });
+    console.log(this.selectedEmployee);
   }
 
   ngOnDestroy() {
@@ -57,5 +69,13 @@ export class EmployeeDetailsComponent {
         });
     }
     this.editing = !this.editing;
+  }
+
+  getSkillsetNames(skillset: any[]): string {
+    if (!skillset || skillset.length === 0) {
+      return 'No skills';
+    }
+
+    return skillset.map((skill) => skill.skill).join(', ');
   }
 }

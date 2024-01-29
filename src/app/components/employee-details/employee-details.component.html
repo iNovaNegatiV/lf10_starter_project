@@ -68,6 +68,14 @@
           <p *ngIf="!editing" class="card-text">{{ selectedEmployee.phone }}</p>
         </div>
       </div>
+      <div class="row line">
+        <div class="col-4">
+          <p class="card-text"><strong>Fähigkeiten:</strong></p>
+        </div>
+        <div class="col-8">
+          <p class="card-text">{{ getSkillsetNames(skills) }}</p>
+        </div>
+      </div>
     </div>
   </div>
 

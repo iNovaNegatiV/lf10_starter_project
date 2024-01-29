@@ -63,4 +63,13 @@ export class EmployeeService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${this.bearer}`);
   }
+
+  getEmployeeQualifications(id: number): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + 'employees/' + id + '/qualifications',
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
 }
