@@ -13,13 +13,13 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'employees/:id',
+    component: EmployeeDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'skills',
     component: SkillListComponent,
     canActivate:[AuthGuard]
   },
-  {
-    path: 'employees/:id',
-    component: EmployeeDetailsComponent,
-    canActivate: [AuthGuard]
-  }
 ];

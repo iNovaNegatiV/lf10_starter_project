@@ -80,6 +80,6 @@ export class EmployeeDetailsComponent {
   }
 
   navigateToEmployeeSkills() {
-    //this.router.navigate([]);
+    this.router.navigate(['/employees', this.selectedEmployee.id, 'skills']);
   }
 }
