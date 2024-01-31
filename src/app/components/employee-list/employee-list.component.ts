@@ -5,12 +5,18 @@ import { Employee } from '../../entitys/Employee';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
+import {RouterLink} from "@angular/router";
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, EmployeeEntry],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    EmployeeEntry,
+    RouterLink
+  ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',
 })
