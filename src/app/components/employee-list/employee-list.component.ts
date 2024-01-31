@@ -7,6 +7,7 @@ import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
 import {RouterLink} from "@angular/router";
 import { Router } from '@angular/router';
+import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/custom-skills-dropdown.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
     CommonModule,
     MatIconModule,
     EmployeeEntry,
-    RouterLink
+    RouterLink,
+    CustomSkillsDropdownComponent
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',

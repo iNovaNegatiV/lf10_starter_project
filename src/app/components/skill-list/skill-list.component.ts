@@ -6,6 +6,7 @@ import {Skill} from "../../entitys/Skill";
 import {SkillService} from "../../services/skill.service";
 import {SkillEntry} from "../skill-entry/skill-entry.component";
 import {RouterLink} from "@angular/router";
+import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/custom-skills-dropdown.component';
 
 @Component({
   selector: 'app-skill-list',
@@ -14,7 +15,8 @@ import {RouterLink} from "@angular/router";
     CommonModule,
     MatIconModule,
     SkillEntry,
-    RouterLink
+    RouterLink,
+    CustomSkillsDropdownComponent
   ],
   templateUrl: './skill-list.component.html',
   styleUrl: './skill-list.component.css'
