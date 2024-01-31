@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Observable, of } from "rxjs";
-import { MatIconModule } from '@angular/material/icon';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Observable, of} from "rxjs";
+import {MatIconModule} from '@angular/material/icon';
 import {Skill} from "../../entitys/Skill";
 import {SkillService} from "../../services/skill.service";
 import {SkillEntry} from "../skill-entry/skill-entry.component";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-skill-list',
@@ -22,7 +22,9 @@ import {RouterLink} from "@angular/router";
 export class SkillListComponent implements OnInit {
   skills$: Observable<Skill[]>;
 
-  constructor(private service: SkillService) {
+  constructor(private service: SkillService,
+              private router: Router) {
+
     this.skills$ = of([]);
   }
 
@@ -33,5 +35,10 @@ export class SkillListComponent implements OnInit {
 
   fetchData() {
     this.skills$ = this.service.getAllSkills();
+  }
+
+  goToDetails(skill: Skill) {
+    this.service.setSelectedSkill(skill);
+    this.router.navigate(['/skills', skill.id]);
   }
 }

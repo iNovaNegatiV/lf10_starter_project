@@ -4,6 +4,7 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import { AuthGuard } from './services/authguard.guard';
 import {SkillListComponent} from "./components/skill-list/skill-list.component";
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import {SkillDetailsComponent} from "./components/skill-details/skill-details.component";
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -20,6 +21,11 @@ export const routes: Routes = [
   {
     path: 'employees/:id',
     component: EmployeeDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'skills/:id',
+    component: SkillDetailsComponent,
     canActivate: [AuthGuard]
   }
 ];
