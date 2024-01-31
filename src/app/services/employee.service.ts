@@ -80,4 +80,16 @@ export class EmployeeService {
       },
     );
   }
+
+  deleteEmployeeQualification(skill: string): Observable<any> {
+    return this.http.delete<any>(
+      this.baseUrl + 'employees/' + this.selectedEmployeeSubject.value?.id + '/qualifications/',
+      {
+        headers: this.getHeaders(),
+        body: {
+          skill: skill
+        }
+      },
+    );
+  }
 }

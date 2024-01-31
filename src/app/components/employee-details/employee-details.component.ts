@@ -72,7 +72,7 @@ export class EmployeeDetailsComponent {
 
   getSkillsetNames(skillset: any[]): string {
     if (!skillset || skillset.length === 0) {
-      return 'No skills';
+      return 'Keine Fähigkeiten';
     }
 
     return skillset.map((skill) => skill.skill).join(', ');

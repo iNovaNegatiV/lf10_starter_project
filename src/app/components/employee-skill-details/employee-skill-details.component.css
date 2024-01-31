@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.delete-icon:hover {
+  cursor: pointer;
+}
+
 .line {
   margin-top: 1rem;
   margin-bottom: 1rem;

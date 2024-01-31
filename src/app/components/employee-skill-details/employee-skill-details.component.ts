@@ -4,11 +4,12 @@ import { EmployeeService } from '../../services/employee.service';
 import { MatIconModule } from '@angular/material/icon';
 import { Employee } from '../../entitys/Employee';
 import { Subject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee-skill-details',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, CommonModule],
   templateUrl: './employee-skill-details.component.html',
   styleUrl: './employee-skill-details.component.css',
 })
@@ -28,7 +29,7 @@ export class EmployeeSkillDetailsComponent {
       }
       this.selectedEmployee = employee;
     });
-  }
+      }
 
   ngOnDestroy() {
     this.destroy$.next(true);
@@ -37,5 +38,14 @@ export class EmployeeSkillDetailsComponent {
 
   navigateBack() {
     this.router.navigate(['/employees', this.selectedEmployee.id]);
+  }
+
+  deleteEmployeeQualification(skill: string) {
+    this.employeeService
+      .deleteEmployeeQualification(skill)
+      .subscribe((data) => {
+        this.selectedEmployee.skillSet = data.skillSet;
+        this.employeeService.setSelectEmployee(this.selectedEmployee);
+      });
   }
 }
