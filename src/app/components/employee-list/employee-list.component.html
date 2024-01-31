@@ -14,6 +14,7 @@
     <app-employee-entry
       *ngFor="let employee of employees$ | async"
       [employee]="employee"
+      (click)="goToDetails(employee)"
     />
   </div>
 </div>
