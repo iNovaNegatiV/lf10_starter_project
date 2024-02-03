@@ -1,0 +1,20 @@
+<div class="dropdown-wrapper d-flex flex-column m-3">
+    <div class="position-relative d-flex flex-column align-items-center justify-content-center">
+        <input class="query w-100" type="text" placeholder="" [(ngModel)]="query" (keyup)="search($event)" />
+        <mat-icon class="search-icon position-absolute top-50 end-0 translate-middle">search</mat-icon>
+    </div>
+    <div class="options d-flex flex-column align-items-center justify-content-center">
+        <app-custom-skills-dropdown-option
+            *ngIf="query != '' && filteredSkills.length < 1"
+            class="w-100"
+            [skillName]="'Neuen Skill hinzufügen'"
+            (select)="createSkill()"
+        />
+        <app-custom-skills-dropdown-option
+            class="w-100"
+            *ngFor="let skill of filteredSkills;"
+            [skillName]="skill.skill"
+            (select)="selectSkill($event)"
+        />
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.option {
+    border: 1px solid rgba(122, 122, 122, 1.0);
+    border-top: none;
+    height: 2rem;
+    background-color: rgba(200, 200, 200, .5);
+}
+
+.option > button {
+    margin: 0;
+    border: none;
+    outline: none;
+    background: none;
+}
