@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,12 +15,13 @@ import { CommonModule } from '@angular/common';
 })
 export class EmployeeSkillDetailsComponent {
   destroy$ = new Subject();
-  selectedEmployee: Employee = new Employee();
+  @Input() selectedEmployee: Employee = new Employee();
+  @Input() editing:boolean = false;
 
   constructor(
     private router: Router,
     private employeeService: EmployeeService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.employeeService.selectedEmployee$.subscribe((employee) => {
@@ -29,7 +30,7 @@ export class EmployeeSkillDetailsComponent {
       }
       this.selectedEmployee = employee;
     });
-      }
+  }
 
   ngOnDestroy() {
     this.destroy$.next(true);

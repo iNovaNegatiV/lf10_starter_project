@@ -1,23 +1,13 @@
-<div class="container mt-4">
-  <div class="card">
-    <div class="card-header d-flex align-items-center">
-      <mat-icon class="back-arrow" (click)="navigateBack()">arrow_back</mat-icon>
-      <h2 class="ms-2 mb-0">Fähigkeiten von {{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
-    </div>
-    <div class="card-body">
-      <div class="row line justify-content-center" *ngFor="let skill of selectedEmployee.skillSet">
-        <div class="col-6 ">
-          <div class="card bg-light mb-3">
-            <div class="card-body d-flex justify-content-between align-items-center">
-              <p class="card-text mb-0">{{ skill.skill }}</p>
-              <mat-icon class="delete-icon" (click)="deleteEmployeeQualification(skill.skill)">delete</mat-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row line justify-content-center" *ngIf="!(selectedEmployee?.skillSet?.length)">
-        <p>Keine Fähigkeiten</p>
+<div class="row line justify-content-center" *ngFor="let skill of selectedEmployee.skillSet">
+  <div class="col">
+    <div class="card bg-light mb-2">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <p class="card-text mb-0">{{ skill.skill }}</p>
+        <mat-icon class="delete-icon" *ngIf="editing" (click)="deleteEmployeeQualification(skill.skill)">delete</mat-icon>
       </div>
     </div>
   </div>
+</div>
+<div class="row line justify-content-center" *ngIf="!(selectedEmployee?.skillSet?.length)">
+  <p>Keine Fähigkeiten</p>
 </div>

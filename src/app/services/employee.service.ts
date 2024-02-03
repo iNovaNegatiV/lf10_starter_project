@@ -59,6 +59,7 @@ export class EmployeeService {
         postcode: employee.postcode,
         city: employee.city,
         phone: employee.phone,
+        skillSet: this.getSkillIds(employee.skillSet ?? [])
       },
       {
         headers: this.getHeaders(),
@@ -91,5 +92,15 @@ export class EmployeeService {
         }
       },
     );
+  }
+
+  getEmployee(id: string): Observable<Employee> {
+    return this.http.get<Employee>(this.baseUrl + 'employees/' + id, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  getSkillIds(skillSet: { id: number; skill: string }[]): number[] {
+    return skillSet.map(skill => skill.id);
   }
 }
