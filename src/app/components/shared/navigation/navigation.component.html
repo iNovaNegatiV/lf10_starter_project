@@ -1,4 +1,4 @@
-<div (click)="closeMenu()" class="bg-blur position-fixed w-100 top-0 start-0"></div>
+<app-background-blur [active]="isBlurry" [layer]="1" (close)="closeMenu()" />
 <div class="small-menu px-5">
   <button (click)="openMenu()" class="bg-transparent border-0 p-0 m-0">
     <mat-icon class="small-menu-icon text-light">menu</mat-icon>

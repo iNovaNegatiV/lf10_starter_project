@@ -1,0 +1,14 @@
+.filter {
+  background-color: rgba(230, 94, 94, .9);
+  width: 90%;
+}
+
+.skillset {
+  width: 100%;
+  height: 250px;
+  border: 2px dotted black;
+}
+
+.skillset-text {
+  z-index: -1;
+}

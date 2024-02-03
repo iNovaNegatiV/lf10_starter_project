@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Employee } from '../entitys/Employee';
 import { KeycloakService } from 'keycloak-angular';
+import { Qualification } from '../entitys/Qualification';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,23 @@ export class EmployeeService {
     this.bearer = await this.keycloak.getToken();
   }
 
-  public getAllEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.baseUrl + 'employees', {
-      headers: this.getHeaders(),
+  public async getAllEmployees(): Promise<Employee[]> {
+    return new Promise(resolve => {
+      this.http.get<Employee[]>(this.baseUrl + 'employees', {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${this.bearer}`)
+      }).subscribe((data: Employee[]) => {
+        resolve(data);
+      });
+    });
+  }
+
+  public getAllQualifications(): Observable<Qualification[]> {
+    return this.http.get<Qualification[]>(this.baseUrl + 'qualifications', {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${this.bearer}`)
     });
   }
 

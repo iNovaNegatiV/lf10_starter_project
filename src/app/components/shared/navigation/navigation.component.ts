@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
+import { BackgroundBlurComponent } from '../background-blur/background-blur.component';
 
 @Component({
   selector: 'app-navigation',
@@ -10,7 +11,8 @@ import { KeycloakService } from 'keycloak-angular';
   imports: [
     CommonModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    BackgroundBlurComponent
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css'
@@ -18,8 +20,8 @@ import { KeycloakService } from 'keycloak-angular';
 export class NavigationComponent implements AfterViewInit {
 
   private bigMenuElement?: HTMLDivElement;
-  private backgroundBlurElement?: HTMLDivElement;
   private currentRoute?: string;
+  public isBlurry: boolean = false;
 
   constructor(
     private router: Router,
@@ -29,9 +31,7 @@ export class NavigationComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     // Get HTMLElement
     const menu: HTMLDivElement = (<HTMLDivElement> document.querySelector('.big-menu'));
-    const background: HTMLDivElement = (<HTMLDivElement> document.querySelector('.bg-blur'));
     this.bigMenuElement = menu;
-    this.backgroundBlurElement = background;
 
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
@@ -43,12 +43,13 @@ export class NavigationComponent implements AfterViewInit {
 
   openMenu(): void {
     this.bigMenuElement?.classList.add('open');
-    this.backgroundBlurElement?.classList.add('blur-active');
+    this.isBlurry = true;
+
   }
 
   closeMenu(): void {
     this.bigMenuElement?.classList.remove('open');
-    this.backgroundBlurElement?.classList.remove('blur-active');
+    this.isBlurry = false;
   }
 
   setCurrentRoute(): void {
