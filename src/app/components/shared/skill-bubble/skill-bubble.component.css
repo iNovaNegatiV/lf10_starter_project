@@ -1,0 +1,13 @@
+.bubble {
+  padding: .1rem 1rem;
+  border: 1px solid black;
+}
+
+.bubble > p {
+  margin: 0;
+}
+
+.bubble-close {
+  margin: 0;
+  padding: 0;
+}
