@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, from } from "rxjs";
-import { Employee } from "../../entitys/Employee";
+import { FilterComponent } from '../shared/filter/filter.component';
+import { Observable, of } from 'rxjs';
+import { Employee } from '../../entitys/Employee';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
-import { FilterComponent } from '../shared/filter/filter.component';
+import { RouterLink } from "@angular/router";
+import { Router } from '@angular/router';
+import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/custom-skills-dropdown.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,16 +18,22 @@ import { FilterComponent } from '../shared/filter/filter.component';
     MatIconModule,
     EmployeeEntry,
     FilterComponent
+    RouterLink,
+    CustomSkillsDropdownComponent
   ],
   templateUrl: './employee-list.component.html',
-  styleUrl: './employee-list.component.css'
+  styleUrl: './employee-list.component.css',
 })
 export class EmployeeListComponent implements OnInit {
   private employees: Employee[] = [];
   filtering: boolean = false;
-  filterSettings: {name: string, skills: string[]} = {name: '', skills: ["Javah", "Jazza", "Javnba", "Jhgfava", "Jaztrva", "Jaztva", "Janbvva", "Jagfdva", "Jadsva", "SKill"]};
+  filterSettings: {name: string, skills: string[]} = {name: '', skills: []};
 
-  constructor(private service: EmployeeService) {
+  constructor(
+    private service: EmployeeService,
+    private router: Router,
+  ) {
+    this.employees$ = of([]);
   }
 
   async ngOnInit() {
@@ -76,5 +85,10 @@ export class EmployeeListComponent implements OnInit {
       // Passed employees
       return true;
     });
+  }
+
+  goToDetails(employee: Employee) {
+    this.service.setSelectEmployee(employee);
+    this.router.navigate(['/employees', employee.id]);
   }
 }

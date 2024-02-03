@@ -1,6 +1,6 @@
 <div class="d-flex flex-column m-4">
   <h2 class="">Übersicht</h2>
-  <button class="align-self-end bg-transparent">Fahigkeiten</button>
+  <button class="align-self-end bg-transparent"><a routerLink="/skills">Fahigkeiten</a></button>
   <div class="d-flex flex-row w-100 pt-3 pb-3">
     <button (click)="activateFilter()" class="d-flex flex-row align-items-center justify-content-center bg-transparent w-25">
       <p class="m-0">Filter</p><mat-icon class="fs-1">keyboard_arrow_down</mat-icon>
@@ -14,6 +14,7 @@
     <app-employee-entry
       *ngFor="let employee of getEmployees()"
       [employee]="employee"
+      (click)="goToDetails(employee)"
     />
   </div>
 </div>

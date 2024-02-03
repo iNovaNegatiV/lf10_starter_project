@@ -7,6 +7,5 @@ export class Employee {
               public city?: string,
               public phone?: string,
               public skillSet: {id?: number, name?: string}[] = []
-              ) {
-  }
+              ) {}
 }
