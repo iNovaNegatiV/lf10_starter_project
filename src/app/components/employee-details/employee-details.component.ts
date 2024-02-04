@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Qualification } from '../../entitys/Qualification';
 import { EmployeeSkillDetailsComponent } from '../employee-skill-details/employee-skill-details.component';
+import { CustomQualificationsDropdownComponent } from '../shared/custom-qualifications-dropdown/custom-qualifications-dropdown.component';
 
 @Component({
   selector: 'app-employee-details',
@@ -18,6 +19,7 @@ import { EmployeeSkillDetailsComponent } from '../employee-skill-details/employe
     FormsModule,
     CommonModule,
     EmployeeSkillDetailsComponent,
+    CustomQualificationsDropdownComponent,
   ],
   templateUrl: './employee-details.component.html',
   styleUrl: './employee-details.component.css',
@@ -32,7 +34,7 @@ export class EmployeeDetailsComponent {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) { }
 
   async ngOnInit() {
     await this.employeeService.setBearer();
@@ -104,5 +106,9 @@ export class EmployeeDetailsComponent {
       this.selectedEmployee.id,
       'qualifications',
     ]);
+  }
+
+  addSkill(qualification: Qualification) {
+    this.selectedEmployee.skillSet.push(qualification);
   }
 }

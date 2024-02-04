@@ -1,8 +1,12 @@
 <div class="container mt-4">
   <div class="card">
     <div class="card-header d-flex align-items-center">
-      <mat-icon class="back-arrow" (click)="navigateBack()">arrow_back</mat-icon>
-      <h2 class="ms-2 mb-0">{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
+      <mat-icon class="back-arrow" (click)="navigateBack()"
+        >arrow_back</mat-icon
+      >
+      <h2 class="ms-2 mb-0">
+        {{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}
+      </h2>
     </div>
     <div class="card-body">
       <div class="row line">
@@ -10,7 +14,11 @@
           <p class="card-text"><strong>ID:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.id" class="form-control"/>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.id"
+            class="form-control"
+          />
           <p *ngIf="!editing" class="card-text">{{ selectedEmployee.id }}</p>
         </div>
       </div>
@@ -19,8 +27,14 @@
           <p class="card-text"><strong>Vorname:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.firstName" class="form-control"/>
-          <p *ngIf="!editing" class="card-text">{{ selectedEmployee.firstName }}</p>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.firstName"
+            class="form-control"
+          />
+          <p *ngIf="!editing" class="card-text">
+            {{ selectedEmployee.firstName }}
+          </p>
         </div>
       </div>
       <div class="row line">
@@ -28,8 +42,14 @@
           <p class="card-text"><strong>Nachname:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.lastName" class="form-control"/>
-          <p *ngIf="!editing" class="card-text">{{ selectedEmployee.lastName }}</p>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.lastName"
+            class="form-control"
+          />
+          <p *ngIf="!editing" class="card-text">
+            {{ selectedEmployee.lastName }}
+          </p>
         </div>
       </div>
       <div class="row line">
@@ -37,8 +57,14 @@
           <p class="card-text"><strong>Straße:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.street" class="form-control"/>
-          <p *ngIf="!editing" class="card-text">{{ selectedEmployee.street }}</p>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.street"
+            class="form-control"
+          />
+          <p *ngIf="!editing" class="card-text">
+            {{ selectedEmployee.street }}
+          </p>
         </div>
       </div>
       <div class="row line">
@@ -46,8 +72,14 @@
           <p class="card-text"><strong>Postleitzahl:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.postcode" class="form-control"/>
-          <p *ngIf="!editing" class="card-text">{{ selectedEmployee.postcode }}</p>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.postcode"
+            class="form-control"
+          />
+          <p *ngIf="!editing" class="card-text">
+            {{ selectedEmployee.postcode }}
+          </p>
         </div>
       </div>
       <div class="row line">
@@ -55,7 +87,11 @@
           <p class="card-text"><strong>Stadt:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.city" class="form-control"/>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.city"
+            class="form-control"
+          />
           <p *ngIf="!editing" class="card-text">{{ selectedEmployee.city }}</p>
         </div>
       </div>
@@ -64,7 +100,11 @@
           <p class="card-text"><strong>Tel:</strong></p>
         </div>
         <div class="col-8">
-          <input *ngIf="editing" [(ngModel)]="selectedEmployee.phone" class="form-control"/>
+          <input
+            *ngIf="editing"
+            [(ngModel)]="selectedEmployee.phone"
+            class="form-control"
+          />
           <p *ngIf="!editing" class="card-text">{{ selectedEmployee.phone }}</p>
         </div>
       </div>
@@ -73,7 +113,14 @@
           <p class="card-text"><strong>Fähigkeiten:</strong></p>
         </div>
         <div class="col-8">
-          <app-employee-skill-details [selectedEmployee]="selectedEmployee" [editing]="editing"></app-employee-skill-details>
+          <app-employee-skill-details
+            [selectedEmployee]="selectedEmployee"
+            [editing]="editing"
+          ></app-employee-skill-details>
+          <app-custom-qualifications-dropdown
+            *ngIf="editing"
+            (select)="addSkill($event)"
+          ></app-custom-qualifications-dropdown>
         </div>
       </div>
     </div>
@@ -81,7 +128,7 @@
 
   <div class="mt-2 text-end">
     <button class="btn" (click)="toggleEdit()">
-      <mat-icon>{{ editing ? 'save' : 'edit' }}</mat-icon>
+      <mat-icon>{{ editing ? "save" : "edit" }}</mat-icon>
     </button>
   </div>
 </div>
