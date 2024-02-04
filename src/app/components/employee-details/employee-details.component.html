@@ -119,7 +119,8 @@
           ></app-employee-skill-details>
           <app-custom-qualifications-dropdown
             *ngIf="editing"
-            (select)="addSkill($event)"
+            (picked)="addSkill($event)"
+            [qualificationSet]="allQualifications"
           ></app-custom-qualifications-dropdown>
         </div>
       </div>

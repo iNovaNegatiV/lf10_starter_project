@@ -29,15 +29,17 @@ export class EmployeeDetailsComponent {
   selectedEmployee: Employee = new Employee();
   editing = false;
   qualifications: any[] = [];
+  allQualifications: Qualification[] = [];
 
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.employeeService.setBearer();
+    this.allQualifications = await this.employeeService.getAllQualifications();
     this.employeeService.selectedEmployee$
       .pipe(takeUntil(this.destroy$))
       .subscribe((employee) => {
@@ -109,6 +111,12 @@ export class EmployeeDetailsComponent {
   }
 
   addSkill(qualification: Qualification) {
-    this.selectedEmployee.skillSet.push(qualification);
+    if (
+      !this.selectedEmployee.skillSet.some(
+        (skill) => skill.id === qualification.id,
+      )
+    ) {
+      this.selectedEmployee.skillSet.push(qualification);
+    }
   }
 }
