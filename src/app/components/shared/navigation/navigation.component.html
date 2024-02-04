@@ -12,7 +12,7 @@
     <ul class="navigation-list d-flex flex-column gap-3 fs-5 justify-content-start align-items-start text-start list-unstyled m-0 p-0">
       <li route="/" (click)="navigateTo('/')">Homepage</li>
       <li route="/employees" (click)="navigateTo('/employees')">Mitarbeiter</li>
-      <li route="/skills" (click)="navigateTo('/skills')">Qualifikationen</li>
+      <li route="/qualifications" (click)="navigateTo('/qualifications')">Qualifikationen</li>
       <li route="/settings" (click)="navigateTo('/settings')">Einstellungen</li>
       <li *ngIf="isLoggedIn(); else showLogin" (click)="logout()">Ausloggen</li>
       <ng-template #showLogin>

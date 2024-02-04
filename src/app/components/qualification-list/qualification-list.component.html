@@ -8,12 +8,13 @@
     </button>
   </div>
   <div class="d-flex flex-column border-dotted text-light bg-secondary p-2 w-100 m-auto">
-    <app-skill-entry
-      *ngFor="let skill of skills$ | async"
-      [skill]="skill"
+    <app-qualification-entry
+      *ngFor="let qualification of qualifications;"
+      [qualification]="qualification"
     />
   </div>
-  <app-custom-skills-dropdown
-    [skillSet]="skills$ | async"
+  <app-custom-qualifications-dropdown
+    class="mt-4"
+    [qualificationSet]="qualifications"
   />
 </div>

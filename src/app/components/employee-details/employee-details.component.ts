@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Qualification } from '../../entitys/Qualification';
 import { EmployeeSkillDetailsComponent } from "../employee-skill-details/employee-skill-details.component";
 
 @Component({
@@ -20,7 +21,7 @@ export class EmployeeDetailsComponent {
   destroy$ = new Subject();
   selectedEmployee: Employee = new Employee();
   editing = false;
-  skills: any[] = [];
+  qualifications: any[] = [];
 
   constructor(
     private employeeService: EmployeeService,
@@ -48,18 +49,17 @@ export class EmployeeDetailsComponent {
         }
   
         this.selectedEmployee = employee;
-  
-        // Fetch skills for the selected employee
+
+        // Fetch qualifications for the selected employee
         if (employee.id) {
           this.employeeService
             .getEmployeeQualifications(employee.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((qualifications) => {
-              this.skills = qualifications.skillSet || [];
+              this.qualifications = qualifications.qualificationSet || [];
             });
         }
       });
-    console.log(this.selectedEmployee);
   }
 
   ngOnDestroy() {
@@ -83,15 +83,15 @@ export class EmployeeDetailsComponent {
     this.editing = !this.editing;
   }
 
-  getSkillsetNames(skillset: any[]): string {
-    if (!skillset || skillset.length === 0) {
-      return 'Keine Fähigkeiten';
+  getQualificationsetNames(qualificationSet: any[]): string {
+    if (!qualificationSet || qualificationSet.length === 0) {
+      return 'No qualifications';
     }
 
-    return skillset.map((skill) => skill.skill).join(', ');
+    return qualificationSet.map((qualification: Qualification) => qualification.skill).join(', ');
   }
 
-  navigateToEmployeeSkills() {
-    this.router.navigate(['/employees', this.selectedEmployee.id, 'skills']);
+  navigateToEmployeeQualifications() {
+    this.router.navigate(['/employees', this.selectedEmployee.id, 'qualifications']);
   }
 }
