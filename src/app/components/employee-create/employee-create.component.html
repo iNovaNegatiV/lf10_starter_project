@@ -64,8 +64,16 @@
             <p class="card-text"><strong>Fähigkeiten:</strong></p>
           </div>
           <div class="col-8">
+            <p
+              *ngFor="let qualification of selectedQualifications"
+              class="card-text"
+            >
+              {{ qualification }}
+            </p>
             <app-custom-qualifications-dropdown
               [qualificationSet]="existingQualifications"
+              (select)="addQualification($event)"
+              (create)="createQualification($event)"
             >
             </app-custom-qualifications-dropdown>
           </div>

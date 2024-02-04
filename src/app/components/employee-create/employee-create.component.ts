@@ -23,6 +23,7 @@ import { Qualification } from '../../entitys/Qualification';
   styleUrl: './employee-create.component.css',
 })
 export class EmployeeCreateComponent {
+  selectedQualifications: string[] = [];
   existingQualifications: Qualification[] = [];
   newEmployee: PostEmployee = new PostEmployee();
   employeeForm = this.formBuilder.group({
@@ -32,7 +33,6 @@ export class EmployeeCreateComponent {
     postcode: ['', Validators.required],
     city: ['', Validators.required],
     phone: ['', Validators.required],
-    skillSet: [[], Validators.required],
   });
 
   constructor(
@@ -64,7 +64,7 @@ export class EmployeeCreateComponent {
         postcode: this.employeeForm.value.postcode || undefined,
         city: this.employeeForm.value.city || undefined,
         phone: this.employeeForm.value.phone || undefined,
-        skillSet: this.employeeForm.value.skillSet || undefined,
+        skillSet: this.newEmployee.skillSet,
       };
       this.employeeService.createEmployee(this.newEmployee).subscribe(() => {
         this.router.navigate(['/employees']);
@@ -76,5 +76,20 @@ export class EmployeeCreateComponent {
 
       window.alert(`Please fill in the following fields: ${missingFields}`);
     }
+  }
+
+  addQualification(qualification: Qualification) {
+    if (!this.newEmployee.skillSet) {
+      this.newEmployee.skillSet = [];
+    }
+    this.newEmployee.skillSet.push(qualification.id as number);
+    this.selectedQualifications.push(qualification.skill as string);
+    console.log(this.newEmployee.skillSet);
+    console.log(qualification);
+  }
+
+  async createQualification(skill: string) {
+    await this.employeeService.createQualificationByName(skill);
+    await this.fetchData();
   }
 }
