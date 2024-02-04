@@ -4,6 +4,7 @@ button.close {
 
 button.save {
   background-color: rgb(85 129 255);
+  height: 2rem;
 }
 
 .qualification-input {
