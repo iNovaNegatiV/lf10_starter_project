@@ -115,6 +115,18 @@ export class EmployeeService {
     });
   }
 
+  public async deleteQualificationById(id: number): Promise<any> {
+    return new Promise(resolve => {
+      this.http.delete<any>(this.baseUrl + `qualifications/${id}`, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${this.bearer}`)
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
   deleteEmployeeQualification(skill: string): Observable<any> {
     return this.http.delete<any>(
       this.baseUrl + 'employees/' + this.selectedEmployeeSubject.value?.id + '/qualifications/',

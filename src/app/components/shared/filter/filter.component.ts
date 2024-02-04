@@ -42,6 +42,11 @@ export class FilterComponent implements OnInit {
     this.qualifications = await this.service.getAllQualifications();
   }
 
+  async createNewQualificationByName(qualification: string): Promise<void> {
+    await this.service.createQualificationByName(qualification);
+    await this.fetchData();
+  }
+
   addQualification(qualificationName: string): void {
     const foundQualifications: Qualification[] = this.qualifications.filter((qualification: Qualification) => {
       if(qualification.skill == qualificationName) {

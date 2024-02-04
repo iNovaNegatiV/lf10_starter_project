@@ -21,7 +21,7 @@ import { EmployeeService } from '../../../services/employee.service';
 export class CustomQualificationsDropdownComponent implements OnInit, OnChanges {
   @Input() public qualificationSet?: null | Qualification[] = [];
   @Output() public select: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public update: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public create: EventEmitter<string> = new EventEmitter<string>();
   public filteredQualifications: Qualification[] = [];
   public showCount: number = 3;
   public query: string = "";
@@ -50,9 +50,8 @@ export class CustomQualificationsDropdownComponent implements OnInit, OnChanges 
     }
   }
 
-  async createQualification(): Promise<void> {
-    await this.service.createQualificationByName(this.query);
-    this.update.emit('qualifications');
+  createQualification(): void {
+    this.create.emit(this.query);
   }
 
   selectQualification(qualificationName: string): void {

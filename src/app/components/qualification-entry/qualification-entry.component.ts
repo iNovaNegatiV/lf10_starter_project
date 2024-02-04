@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Qualification } from '../../entitys/Qualification';
@@ -12,4 +12,9 @@ import { Qualification } from '../../entitys/Qualification';
 })
 export class QualificationEntry {
   @Input() qualification?: Qualification;
+  @Output() delete: EventEmitter<Qualification> = new EventEmitter<Qualification>();
+
+  public deleteQualification(): void {
+    this.delete.emit(this.qualification);
+  }
 }

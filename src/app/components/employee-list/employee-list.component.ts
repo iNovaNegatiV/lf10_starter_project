@@ -5,8 +5,7 @@ import { Employee } from '../../entitys/Employee';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
-import { RouterLink } from "@angular/router";
-import { Router } from '@angular/router';
+import { Router, RouterLink } from "@angular/router";
 import { CustomQualificationsDropdownComponent } from '../shared/custom-qualifications-dropdown/custom-qualifications-dropdown.component';
 import { Qualification } from '../../entitys/Qualification';
 
