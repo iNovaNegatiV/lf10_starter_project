@@ -4,13 +4,19 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import { AuthGuard } from './services/authguard.guard';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { QualificationListComponent } from './components/qualification-list/qualification-list.component';
+import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {
     path: 'employees',
     component: EmployeeListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'employees/create',
+    component: EmployeeCreateComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'employees/:id',
@@ -20,6 +26,6 @@ export const routes: Routes = [
   {
     path: 'qualifications',
     component: QualificationListComponent,
-    canActivate:[AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
