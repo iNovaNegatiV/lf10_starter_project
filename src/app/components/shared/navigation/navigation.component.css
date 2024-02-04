@@ -4,7 +4,7 @@
 
 .big-menu {
   right: -75%;
-  transition: right .5s ease;
+  transition: right 0.5s ease;
   max-width: 400px;
   z-index: 2;
 }
@@ -26,4 +26,3 @@
   color: #5c65a5;
   text-decoration: underline;
 }
-

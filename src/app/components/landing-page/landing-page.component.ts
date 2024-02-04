@@ -6,13 +6,8 @@ import { TextMediaComponent } from '../shared/text-media/text-media.component';
 @Component({
   selector: 'app-entry-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    TextMediaComponent
-  ],
+  imports: [CommonModule, RouterModule, TextMediaComponent],
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.css'
+  styleUrl: './landing-page.component.css',
 })
-export class LandingPageComponent {
-}
+export class LandingPageComponent {}

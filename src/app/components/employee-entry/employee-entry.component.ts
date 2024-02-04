@@ -8,7 +8,7 @@ import { Employee } from '../../entitys/Employee';
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './employee-entry.component.html',
-  styleUrl: './employee-entry.component.css'
+  styleUrl: './employee-entry.component.css',
 })
 export class EmployeeEntry {
   @Input() employee?: Employee;

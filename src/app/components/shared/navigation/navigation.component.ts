@@ -8,33 +8,29 @@ import { BackgroundBlurComponent } from '../background-blur/background-blur.comp
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatIconModule,
-    BackgroundBlurComponent
-  ],
+  imports: [CommonModule, RouterModule, MatIconModule, BackgroundBlurComponent],
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.css'
+  styleUrl: './navigation.component.css',
 })
 export class NavigationComponent implements AfterViewInit {
-
   private bigMenuElement?: HTMLDivElement;
   private currentRoute?: string;
   public isBlurry: boolean = false;
 
   constructor(
     private router: Router,
-    private keycloak: KeycloakService
+    private keycloak: KeycloakService,
   ) {}
 
   ngAfterViewInit(): void {
     // Get HTMLElement
-    const menu: HTMLDivElement = (<HTMLDivElement> document.querySelector('.big-menu'));
+    const menu: HTMLDivElement = <HTMLDivElement>(
+      document.querySelector('.big-menu')
+    );
     this.bigMenuElement = menu;
 
     this.router.events.subscribe((event) => {
-      if(event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd) {
         this.currentRoute = this.router.url;
         this.setCurrentRoute();
       }
@@ -44,7 +40,6 @@ export class NavigationComponent implements AfterViewInit {
   openMenu(): void {
     this.bigMenuElement?.classList.add('open');
     this.isBlurry = true;
-
   }
 
   closeMenu(): void {
@@ -56,7 +51,7 @@ export class NavigationComponent implements AfterViewInit {
     const liElements = document.querySelectorAll('li');
     liElements.forEach((li) => {
       const route = li.getAttribute('route');
-      if(route && route == this.currentRoute) {
+      if (route && route == this.currentRoute) {
         li.classList.add('route');
       } else {
         li.classList.remove('route');

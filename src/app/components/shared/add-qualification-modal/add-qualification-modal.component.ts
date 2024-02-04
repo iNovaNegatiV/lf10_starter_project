@@ -6,20 +6,16 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-add-qualification-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './add-qualification-modal.component.html',
-  styleUrl: './add-qualification-modal.component.css'
+  styleUrl: './add-qualification-modal.component.css',
 })
 export class AddQualificationModalComponent {
   @Input() public open: boolean = false;
-  @Input() public suggestion: string = "";
+  @Input() public suggestion: string = '';
   @Output() public added: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public canceled: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  @Output() public canceled: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   public addQualification(): void {
     this.added.emit(this.suggestion);

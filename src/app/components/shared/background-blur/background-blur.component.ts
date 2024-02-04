@@ -5,15 +5,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-background-blur',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './background-blur.component.html',
-  styleUrl: './background-blur.component.css'
+  styleUrl: './background-blur.component.css',
 })
 export class BackgroundBlurComponent {
-
   @Input() active: boolean = false;
   @Input() layer: number = 0;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
@@ -21,5 +17,4 @@ export class BackgroundBlurComponent {
   closeBlur(): void {
     this.close.emit(true);
   }
-
 }

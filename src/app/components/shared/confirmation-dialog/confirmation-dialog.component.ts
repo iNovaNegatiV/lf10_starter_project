@@ -8,9 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.css',
 })
-
 export class ConfirmationDialogComponent {
-  @Input() message: string = "test";
+  @Input() message: string = 'test';
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal) {}
 }
