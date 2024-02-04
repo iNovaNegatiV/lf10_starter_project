@@ -41,12 +41,14 @@ export class EmployeeSkillDetailsComponent {
     this.router.navigate(['/employees', this.selectedEmployee.id]);
   }
 
-  deleteEmployeeQualification(skill: string) {
-    this.employeeService
+  deleteEmployeeQualification(skill?: string) {
+    if(skill) {
+      this.employeeService
       .deleteEmployeeQualification(skill)
       .subscribe((data) => {
         this.selectedEmployee.skillSet = data.skillSet;
         this.employeeService.setSelectEmployee(this.selectedEmployee);
       });
+    }
   }
 }

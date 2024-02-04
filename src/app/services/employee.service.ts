@@ -133,7 +133,12 @@ export class EmployeeService {
     });
   }
 
-  getSkillIds(skillSet: { id: number; skill: string }[]): number[] {
-    return skillSet.map(skill => skill.id);
+  getSkillIds(skillSet: { id?: number; skill?: string }[]): number[] {
+    return skillSet.map((skill: { id?: number; skill?: string }) => {
+      if(skill.id) {
+        return skill.id
+      }
+      return -1;
+    });
   }
 }
