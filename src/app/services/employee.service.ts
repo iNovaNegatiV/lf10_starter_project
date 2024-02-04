@@ -111,6 +111,26 @@ export class EmployeeService {
     );
   }
 
+  public async updateQualification(qualification: Qualification): Promise<any> {
+    return new Promise((resolve) => {
+      this.http
+        .put<any>(
+          this.baseUrl + `qualifications/${qualification.id}`,
+          {
+            skill: qualification.skill,
+          },
+          {
+            headers: new HttpHeaders()
+              .set('Content-Type', 'application/json')
+              .set('Authorization', `Bearer ${this.bearer}`),
+          },
+        )
+        .subscribe((data: any) => {
+          resolve(data);
+        });
+    });
+  }
+
   public async deleteEmployeeById(id: number): Promise<any> {
     return new Promise((resolve) => {
       this.http

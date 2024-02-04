@@ -1,0 +1,17 @@
+<div
+  *ngIf="open"
+  class="position-fixed top-50 start-50 translate-middle p-4 bg-light d-flex flex-column gap-3"
+>
+  <button class="bg-transparent border-0 p-0 m-1 close" (click)="closeModal()">
+    <mat-icon>clear</mat-icon>
+  </button>
+  <input
+    type="text"
+    [(ngModel)]="qualification.skill"
+    placeholder="Qualifikation"
+    class="qualification-input"
+  />
+  <button (click)="updateQualification()" class="save text-light border-0">
+    Speichern
+  </button>
+</div>
