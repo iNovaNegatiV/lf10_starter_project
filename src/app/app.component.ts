@@ -10,7 +10,7 @@ import { EmployeeServiceHeaderComponent } from './components/shared/employee-ser
   imports: [
     CommonModule,
     RouterModule,
-    EmployeeServiceHeaderComponent,
+    EmployeeServiceHeaderComponent
   ],
   providers: [
     EmployeeService

@@ -1,0 +1,13 @@
+button.close {
+  width: fit-content;
+}
+
+button.save {
+  background-color: rgb(85 129 255);
+  height: 2rem;
+}
+
+.qualification-input {
+  padding: 5px;
+  border: 2px solid black;
+}

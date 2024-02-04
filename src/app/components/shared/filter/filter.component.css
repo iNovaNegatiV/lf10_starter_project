@@ -1,0 +1,14 @@
+.filter {
+  background-color: rgba(230, 94, 94, .9);
+  width: 90%;
+}
+
+.qualification-set {
+  width: 100%;
+  height: 250px;
+  border: 2px dotted black;
+}
+
+.qualification-set-text {
+  z-index: -1;
+}

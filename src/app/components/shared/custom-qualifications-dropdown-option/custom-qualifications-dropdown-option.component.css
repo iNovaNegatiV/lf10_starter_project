@@ -1,0 +1,22 @@
+.option {
+  border: 1px solid rgba(122, 122, 122, 1);
+  border-top: none;
+  height: 2rem;
+  background-color: #38419e;
+}
+
+.option > button {
+  margin: 0;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.small {
+  font-size: 1rem !important;
+}
+
+.normal {
+  font-size: 1.25rem !important;
+}

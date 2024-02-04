@@ -1,0 +1,42 @@
+<div class="position-relative d-flex flex-column m-4">
+  <h2 class="">Übersicht</h2>
+  <button class="align-self-end bg-transparent">
+    <a routerLink="/employees">Mitarbeiter</a>
+  </button>
+  <div class="d-flex flex-row w-100 pt-3 pb-3">
+    <div class="flex-fill"></div>
+    <button
+      (click)="openAddQualificationModal()"
+      class="d-flex align-items-center justify-content-center bg-transparent"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div
+    class="d-flex flex-column text-light bg-secondary p-4 rounded border border-dark border-2 w-100 m-auto"
+  >
+    <app-qualification-entry
+      *ngFor="let qualification of qualifications"
+      [qualification]="qualification"
+      (edit)="startEditing($event)"
+      (delete)="deleteQualification($event)"
+    />
+  </div>
+  <app-background-blur
+    [active]="addQualificationModalActive || editing"
+    [layer]="0"
+    (close)="closeModals()"
+  />
+  <app-add-qualification-modal
+    class="position-fixed top-50 start-50 translate-middle"
+    [open]="addQualificationModalActive"
+    [suggestion]="qualificationToAdd"
+    (added)="addQualification($event)"
+    (canceled)="closeAddQualificationModal()"
+  />
+  <app-edit-qualification-modal
+    [open]="editing"
+    [qualification]="editableQualification"
+    (close)="stopEditing($event)"
+  />
+</div>
