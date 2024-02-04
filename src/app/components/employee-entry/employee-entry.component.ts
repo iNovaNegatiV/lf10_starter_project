@@ -20,6 +20,8 @@ export class EmployeeEntry {
   }
 
   public deleteEmployee(): void {
-    this.delete.emit(this.employee?.id);
+    if (window.confirm('Mitarbeiter wirklich löschen?')) {
+      this.delete.emit(this.employee?.id);
+    }
   }
 }

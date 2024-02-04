@@ -18,7 +18,9 @@ export class QualificationEntry {
     new EventEmitter<Qualification>();
 
   public deleteQualification(): void {
-    this.delete.emit(this.qualification);
+    if (window.confirm('Mitarbeiter wirklich löschen?')) {
+      this.delete.emit(this.qualification);
+    }
   }
 
   public startEditing(): void {
