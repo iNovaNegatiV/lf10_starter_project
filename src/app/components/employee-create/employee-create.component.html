@@ -72,7 +72,7 @@
             </p>
             <app-custom-qualifications-dropdown
               [qualificationSet]="existingQualifications"
-              (select)="addQualification($event)"
+              (picked)="addQualification($event)"
               (create)="createQualification($event)"
             >
             </app-custom-qualifications-dropdown>

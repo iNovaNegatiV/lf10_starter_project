@@ -5,7 +5,7 @@ import { Employee } from '../../entitys/Employee';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
-import { Router, RouterLink } from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
 import { CustomQualificationsDropdownComponent } from '../shared/custom-qualifications-dropdown/custom-qualifications-dropdown.component';
 import { Qualification } from '../../entitys/Qualification';
 
@@ -63,7 +63,7 @@ export class EmployeeListComponent implements OnInit {
   public getEmployees(): Employee[] {
     return this.employees.filter((employee: Employee) => {
       let nameFound: boolean = false;
-      let qualificationFound: boolean = false;
+      let qualificationsFound: boolean = false;
       const employeeName: string = employee.firstName + ' ' + employee.lastName;
       if (
         employeeName
@@ -82,16 +82,16 @@ export class EmployeeListComponent implements OnInit {
             return true;
           }
           return false;
-        }).length > 0
+        }).length == this.filterSettings.qualifications.length
       ) {
-        qualificationFound = true;
+        qualificationsFound = true;
       }
 
       if (
         this.filterSettings.name != '' &&
         this.filterSettings.qualifications.length > 0
       ) {
-        return nameFound && qualificationFound;
+        return nameFound && qualificationsFound;
       }
 
       if (this.filterSettings.name != '') {
@@ -99,7 +99,7 @@ export class EmployeeListComponent implements OnInit {
       }
 
       if (this.filterSettings.qualifications.length > 0) {
-        return qualificationFound;
+        return qualificationsFound;
       }
       return true;
     });

@@ -34,7 +34,6 @@ export class EmployeeService {
   public async createQualificationByName(
     qualificationName: string,
   ): Promise<{ skill: string }> {
-    console.log('Creating new qualification: ', qualificationName);
     return new Promise((resolve) => {
       this.http
         .post<{ skill: string }>(
@@ -127,14 +126,16 @@ export class EmployeeService {
   }
 
   public async deleteQualificationById(id: number): Promise<any> {
-    return new Promise(resolve => {
-      this.http.delete<any>(this.baseUrl + `qualifications/${id}`, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Authorization', `Bearer ${this.bearer}`)
-      }).subscribe((data: any) => {
-        resolve(data);
-      });
+    return new Promise((resolve) => {
+      this.http
+        .delete<any>(this.baseUrl + `qualifications/${id}`, {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `Bearer ${this.bearer}`),
+        })
+        .subscribe((data: any) => {
+          resolve(data);
+        });
     });
   }
 

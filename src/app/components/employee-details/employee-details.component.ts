@@ -8,12 +8,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Qualification } from '../../entitys/Qualification';
-import { EmployeeSkillDetailsComponent } from "../employee-skill-details/employee-skill-details.component";
+import { EmployeeSkillDetailsComponent } from '../employee-skill-details/employee-skill-details.component';
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [MatIconModule, FormsModule, CommonModule, EmployeeSkillDetailsComponent],
+  imports: [
+    MatIconModule,
+    FormsModule,
+    CommonModule,
+    EmployeeSkillDetailsComponent,
+  ],
   templateUrl: './employee-details.component.html',
   styleUrl: './employee-details.component.css',
 })
@@ -27,18 +32,18 @@ export class EmployeeDetailsComponent {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.employeeService.setBearer();
     this.employeeService.selectedEmployee$
       .pipe(takeUntil(this.destroy$))
       .subscribe((employee) => {
-        console.log(employee);
         if (employee == null) {
           const employeeId = this.route.snapshot.paramMap.get('id');
           if (employeeId) {
-            this.employeeService.getEmployee(employeeId)
+            this.employeeService
+              .getEmployee(employeeId)
               .pipe(takeUntil(this.destroy$))
               .subscribe((employee) => {
                 this.selectedEmployee = employee;
@@ -47,7 +52,7 @@ export class EmployeeDetailsComponent {
           }
           return;
         }
-  
+
         this.selectedEmployee = employee;
 
         // Fetch qualifications for the selected employee
@@ -88,10 +93,16 @@ export class EmployeeDetailsComponent {
       return 'No qualifications';
     }
 
-    return qualificationSet.map((qualification: Qualification) => qualification.skill).join(', ');
+    return qualificationSet
+      .map((qualification: Qualification) => qualification.skill)
+      .join(', ');
   }
 
   navigateToEmployeeQualifications() {
-    this.router.navigate(['/employees', this.selectedEmployee.id, 'qualifications']);
+    this.router.navigate([
+      '/employees',
+      this.selectedEmployee.id,
+      'qualifications',
+    ]);
   }
 }

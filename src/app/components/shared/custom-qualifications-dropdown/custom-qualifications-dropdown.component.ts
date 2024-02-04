@@ -30,7 +30,8 @@ export class CustomQualificationsDropdownComponent
   implements OnInit, OnChanges
 {
   @Input() public qualificationSet?: null | Qualification[] = [];
-  @Output() public select: EventEmitter<Qualification> = new EventEmitter<Qualification>();
+  @Output() public picked: EventEmitter<Qualification> =
+    new EventEmitter<Qualification>();
   @Output() public create: EventEmitter<string> = new EventEmitter<string>();
   public filteredQualifications: Qualification[] = [];
   public showCount: number = 3;
@@ -54,7 +55,7 @@ export class CustomQualificationsDropdownComponent
           if (
             qualification.skill
               ?.toLowerCase()
-              .includes(this.query.toLowerCase()) &&
+              .startsWith(this.query.toLowerCase()) &&
             this.query != '' &&
             index < this.showCount
           ) {
@@ -72,6 +73,8 @@ export class CustomQualificationsDropdownComponent
   }
 
   selectQualification(qualification: Qualification): void {
-    this.select.emit(qualification);
+    this.picked.emit(qualification);
+    this.query = '';
+    this.search({});
   }
 }
