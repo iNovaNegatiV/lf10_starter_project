@@ -3,12 +3,12 @@
   width: 90%;
 }
 
-.skillset {
+.qualification-set {
   width: 100%;
   height: 250px;
   border: 2px dotted black;
 }
 
-.skillset-text {
+.qualification-set-text {
   z-index: -1;
 }

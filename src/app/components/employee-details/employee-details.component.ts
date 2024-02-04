@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Qualification } from '../../entitys/Qualification';
 
 @Component({
   selector: 'app-employee-details',
@@ -19,7 +20,7 @@ export class EmployeeDetailsComponent {
   destroy$ = new Subject();
   selectedEmployee: Employee = new Employee();
   editing = false;
-  skills: any[] = [];
+  qualifications: any[] = [];
 
   constructor(
     private employeeService: EmployeeService,
@@ -36,17 +37,16 @@ export class EmployeeDetailsComponent {
 
         this.selectedEmployee = employee;
 
-        // Fetch skills for the selected employee
+        // Fetch qualifications for the selected employee
         if (employee.id) {
           this.employeeService
             .getEmployeeQualifications(employee.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((qualifications) => {
-              this.skills = qualifications.skillSet || [];
+              this.qualifications = qualifications.qualificationSet || [];
             });
         }
       });
-    console.log(this.selectedEmployee);
   }
 
   ngOnDestroy() {
@@ -71,15 +71,15 @@ export class EmployeeDetailsComponent {
     this.editing = !this.editing;
   }
 
-  getSkillsetNames(skillset: any[]): string {
-    if (!skillset || skillset.length === 0) {
-      return 'No skills';
+  getQualificationsetNames(qualificationSet: any[]): string {
+    if (!qualificationSet || qualificationSet.length === 0) {
+      return 'No qualifications';
     }
 
-    return skillset.map((skill) => skill.skill).join(', ');
+    return qualificationSet.map((qualification: Qualification) => qualification.skill).join(', ');
   }
 
-  navigateToEmployeeSkills() {
+  navigateToEmployeeQualifications() {
     //this.router.navigate([]);
   }
 }

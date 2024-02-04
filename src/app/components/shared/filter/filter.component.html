@@ -21,15 +21,20 @@
     <div class="d-flex flex-column">
       <p>Fähigkeiten</p>
       <div class="d-flex flex-row align-items-center gap-3">
-        <input class="w-100" type="text" placeholder="Fähigkeit" />
+        <app-custom-qualifications-dropdown
+          class="w-100"
+          [qualificationSet]="qualifications"
+          (select)="addQualification($event)"
+          (update)="fetchData()"
+        />
       </div>
-      <div class="skillset position-relative m-auto mt-5">
-        <p class="position-absolute top-50 start-50 translate-middle m-0 skillset-text">Skills</p>
+      <div class="qualification-set position-relative m-auto mt-5">
+        <p class="position-absolute top-50 start-50 translate-middle m-0 qualification-set-text">Qualifikationen</p>
         <div class="d-flex flex-row flex-wrap justify-content-center w-100 p-2 gap-2">
-          <app-skill-bubble
-            *ngFor="let skill of filterState.skills"
-            [skill]="skill"
-            (remove)="removeSkill($event)"
+          <app-qualification-bubble
+            *ngFor="let qualification of filterState.qualifications"
+            [qualificationName]="qualification"
+            (remove)="removeQualification($event)"
           />
         </div>
       </div>

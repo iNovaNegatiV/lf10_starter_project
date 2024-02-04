@@ -24,6 +24,29 @@ export class EmployeeService {
     this.bearer = await this.keycloak.getToken();
   }
 
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.bearer}`);
+  }
+
+  public async createQualificationByName(qualificationName: string): Promise<{skill: string}> {
+    console.log("Creating new qualification: ", qualificationName);
+    return new Promise(resolve => {
+      this.http.post<{skill: string}>(
+        this.baseUrl + 'qualifications',
+        {
+          skill: qualificationName
+        },
+        {
+          headers: this.getHeaders()
+        }
+      ).subscribe((data: {skill: string}) => {
+        resolve(data);
+      });
+    });
+  }
+
   public async getAllEmployees(): Promise<Employee[]> {
     return new Promise(resolve => {
       this.http.get<Employee[]>(this.baseUrl + 'employees', {
@@ -36,19 +59,32 @@ export class EmployeeService {
     });
   }
 
-  public getAllQualifications(): Observable<Qualification[]> {
-    return this.http.get<Qualification[]>(this.baseUrl + 'qualifications', {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)
+  public async getAllQualifications(): Promise<Qualification[]> {
+    return new Promise(resolve => {
+      this.http.get<Qualification[]>(this.baseUrl + 'qualifications', {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${this.bearer}`)
+      }).subscribe((data: Qualification[]) => {
+        resolve(data);
+      });
     });
   }
 
-  setSelectEmployee(employee: Employee | null) {
+  public getEmployeeQualifications(id: number): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + 'employees/' + id + '/qualifications',
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+
+  public setSelectEmployee(employee: Employee | null) {
     this.selectedEmployeeSubject.next(employee);
   }
 
-  updateEmployee(employee: Employee): Observable<Employee> {
+  public updateEmployee(employee: Employee): Observable<Employee> {
     return this.http.put<Employee>(
       this.baseUrl + 'employees/' + employee.id,
       {
@@ -66,18 +102,15 @@ export class EmployeeService {
     );
   }
 
-  getHeaders(): HttpHeaders {
-    return new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.bearer}`);
-  }
-
-  getEmployeeQualifications(id: number): Observable<any> {
-    return this.http.get<any>(
-      this.baseUrl + 'employees/' + id + '/qualifications',
-      {
-        headers: this.getHeaders(),
-      },
-    );
+  public async deleteEmployeeById(id: number): Promise<any> {
+    return new Promise(resolve => {
+      this.http.delete<any>(this.baseUrl + `employees/${id}`, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${this.bearer}`)
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
   }
 }

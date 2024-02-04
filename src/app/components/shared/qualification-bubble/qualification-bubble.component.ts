@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-skill-bubble',
+  selector: 'app-qualification-bubble',
   standalone: true,
   imports: [
     CommonModule,
     MatIconModule
   ],
-  templateUrl: './skill-bubble.component.html',
-  styleUrl: './skill-bubble.component.css'
+  templateUrl: './qualification-bubble.component.html',
+  styleUrl: './qualification-bubble.component.css'
 })
-export class SkillBubbleComponent {
-  @Input() skill: string = "";
+export class QualificationBubbleComponent {
+  @Input() qualificationName: string = "";
   @Output() remove: EventEmitter<string> = new EventEmitter<string>();
 
   public removeBubble(): void {
-    this.remove.emit(this.skill);
+    this.remove.emit(this.qualificationName);
   }
 }

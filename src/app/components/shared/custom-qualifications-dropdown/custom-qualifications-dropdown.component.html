@@ -1,0 +1,20 @@
+<div class="dropdown-wrapper d-flex flex-column w-100">
+    <div class="position-relative d-flex flex-column align-items-center justify-content-center">
+        <input class="query w-100" type="text" placeholder="" [(ngModel)]="query" (keyup)="search($event)" />
+        <mat-icon class="search-icon position-absolute top-50 end-0 translate-middle">search</mat-icon>
+    </div>
+    <div class="options d-flex flex-column align-items-center justify-content-center">
+        <app-custom-qualifications-dropdown-option
+            *ngIf="query != '' && filteredQualifications.length < 1"
+            class="w-100"
+            [qualificationName]="'Qualifikation hinzufügen'"
+            (select)="createQualification()"
+        />
+        <app-custom-qualifications-dropdown-option
+            class="w-100"
+            *ngFor="let qualification of filteredQualifications;"
+            [qualificationName]="qualification.skill"
+            (select)="selectQualification($event)"
+        />
+    </div>
+</div>

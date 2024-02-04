@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterComponent } from '../shared/filter/filter.component';
-import { Observable, of } from 'rxjs';
 import { Employee } from '../../entitys/Employee';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeEntry } from '../employee-entry/employee-entry.component';
 import { EmployeeService } from '../../services/employee.service';
 import { RouterLink } from "@angular/router";
 import { Router } from '@angular/router';
-import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/custom-skills-dropdown.component';
+import { CustomQualificationsDropdownComponent } from '../shared/custom-qualifications-dropdown/custom-qualifications-dropdown.component';
+import { Qualification } from '../../entitys/Qualification';
 
 @Component({
   selector: 'app-employee-list',
@@ -17,9 +17,9 @@ import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/
     CommonModule,
     MatIconModule,
     EmployeeEntry,
-    FilterComponent
+    FilterComponent,
     RouterLink,
-    CustomSkillsDropdownComponent
+    CustomQualificationsDropdownComponent
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',
@@ -27,14 +27,12 @@ import { CustomSkillsDropdownComponent } from '../shared/custom-skills-dropdown/
 export class EmployeeListComponent implements OnInit {
   private employees: Employee[] = [];
   filtering: boolean = false;
-  filterSettings: {name: string, skills: string[]} = {name: '', skills: []};
+  filterSettings: {name: string, qualifications: string[]} = {name: '', qualifications: []};
 
   constructor(
     private service: EmployeeService,
-    private router: Router,
-  ) {
-    this.employees$ = of([]);
-  }
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     await this.service.setBearer();
@@ -53,36 +51,39 @@ export class EmployeeListComponent implements OnInit {
     this.filtering = false;
   }
 
-  setFilterSettings(settings: {name: string, skills: string[]}): void {
+  setFilterSettings(settings: {name: string, qualifications: string[]}): void {
     this.filterSettings = settings;
   }
 
   public getEmployees(): Employee[] {
-    return this.employees.filter(employee => {
+    return this.employees.filter((employee: Employee) => {
+      let nameFound: boolean = false;
+      let qualificationFound: boolean = false;
+      const employeeName: string = employee.firstName + " " + employee.lastName;
+      if(employeeName.toLowerCase().includes(this.filterSettings.name.toLowerCase())) {
+        nameFound = true;
+      }
 
-      // Name check
-      const employeeName = employee.firstName + " " + employee.lastName;
+      if(employee.skillSet.filter((qualification: Qualification) => {
+        if(qualification.skill && this.filterSettings.qualifications.includes(qualification.skill)) {
+          return true;
+        }
+        return false;
+      }).length > 0) {
+        qualificationFound = true;
+      }
+
+      if(this.filterSettings.name != '' && this.filterSettings.qualifications.length > 0) {
+        return nameFound && qualificationFound;
+      }
+
       if(this.filterSettings.name != '') {
-        if(!employeeName.toLowerCase().includes(this.filterSettings.name.toLowerCase())) {
-          return false;
-        }
+        return nameFound;
       }
 
-      // Skills check
-      if(this.filterSettings.skills.length > 0) {
-        const overlappingSkills = employee.skillSet.filter(skillObject => {
-          if(skillObject.name && this.filterSettings.skills.includes(skillObject.name)) {
-            return true;
-          }
-          return false;
-        });
-
-        if(overlappingSkills.length <= 0) {
-          return false;
-        }
+      if(this.filterSettings.qualifications.length > 0) {
+        return qualificationFound;
       }
-
-      // Passed employees
       return true;
     });
   }
@@ -90,5 +91,15 @@ export class EmployeeListComponent implements OnInit {
   goToDetails(employee: Employee) {
     this.service.setSelectEmployee(employee);
     this.router.navigate(['/employees', employee.id]);
+  }
+
+  deleteEmployeeById(employeeId: number): void {
+    this.service.deleteEmployeeById(employeeId);
+    this.employees = this.employees.filter((employee: Employee) => {
+      if(employee.id == employeeId) {
+        return false;
+      }
+      return true;
+    });
   }
 }
