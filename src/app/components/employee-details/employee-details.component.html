@@ -73,12 +73,7 @@
           <p class="card-text"><strong>Fähigkeiten:</strong></p>
         </div>
         <div class="col-8">
-          <p class="card-text">{{ getSkillsetNames(skills) }}</p>
-        </div>
-      </div>
-      <div class="row line">
-        <div class="col-4">
-          <button class="btn btn-secondary btn-sm" (click)="navigateToEmployeeSkills()">Fähigkeiten verwalten</button>
+          <app-employee-skill-details [selectedEmployee]="selectedEmployee" [editing]="editing"></app-employee-skill-details>
         </div>
       </div>
     </div>
