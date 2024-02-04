@@ -18,7 +18,7 @@ import { Qualification } from '../../entitys/Qualification';
     EmployeeEntry,
     FilterComponent,
     RouterLink,
-    CustomQualificationsDropdownComponent
+    CustomQualificationsDropdownComponent,
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',
@@ -26,11 +26,14 @@ import { Qualification } from '../../entitys/Qualification';
 export class EmployeeListComponent implements OnInit {
   private employees: Employee[] = [];
   filtering: boolean = false;
-  filterSettings: {name: string, qualifications: string[]} = {name: '', qualifications: []};
+  filterSettings: { name: string; qualifications: string[] } = {
+    name: '',
+    qualifications: [],
+  };
 
   constructor(
     private service: EmployeeService,
-    private router: Router
+    private router: Router,
   ) {}
 
   async ngOnInit() {
@@ -50,7 +53,10 @@ export class EmployeeListComponent implements OnInit {
     this.filtering = false;
   }
 
-  setFilterSettings(settings: {name: string, qualifications: string[]}): void {
+  setFilterSettings(settings: {
+    name: string;
+    qualifications: string[];
+  }): void {
     this.filterSettings = settings;
   }
 
@@ -58,29 +64,41 @@ export class EmployeeListComponent implements OnInit {
     return this.employees.filter((employee: Employee) => {
       let nameFound: boolean = false;
       let qualificationFound: boolean = false;
-      const employeeName: string = employee.firstName + " " + employee.lastName;
-      if(employeeName.toLowerCase().includes(this.filterSettings.name.toLowerCase())) {
+      const employeeName: string = employee.firstName + ' ' + employee.lastName;
+      if (
+        employeeName
+          .toLowerCase()
+          .includes(this.filterSettings.name.toLowerCase())
+      ) {
         nameFound = true;
       }
 
-      if(employee.skillSet.filter((qualification: Qualification) => {
-        if(qualification.skill && this.filterSettings.qualifications.includes(qualification.skill)) {
-          return true;
-        }
-        return false;
-      }).length > 0) {
+      if (
+        employee.skillSet.filter((qualification: Qualification) => {
+          if (
+            qualification.skill &&
+            this.filterSettings.qualifications.includes(qualification.skill)
+          ) {
+            return true;
+          }
+          return false;
+        }).length > 0
+      ) {
         qualificationFound = true;
       }
 
-      if(this.filterSettings.name != '' && this.filterSettings.qualifications.length > 0) {
+      if (
+        this.filterSettings.name != '' &&
+        this.filterSettings.qualifications.length > 0
+      ) {
         return nameFound && qualificationFound;
       }
 
-      if(this.filterSettings.name != '') {
+      if (this.filterSettings.name != '') {
         return nameFound;
       }
 
-      if(this.filterSettings.qualifications.length > 0) {
+      if (this.filterSettings.qualifications.length > 0) {
         return qualificationFound;
       }
       return true;
@@ -95,10 +113,14 @@ export class EmployeeListComponent implements OnInit {
   deleteEmployeeById(employeeId: number): void {
     this.service.deleteEmployeeById(employeeId);
     this.employees = this.employees.filter((employee: Employee) => {
-      if(employee.id == employeeId) {
+      if (employee.id == employeeId) {
         return false;
       }
       return true;
     });
+  }
+
+  navigateToCreateEmployee() {
+    this.router.navigate(['/employees/create']);
   }
 }

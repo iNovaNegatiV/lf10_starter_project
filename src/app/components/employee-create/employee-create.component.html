@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header d-flex align-items-center">
+      <mat-icon class="back-arrow" (click)="navigateBack()"
+        >arrow_back</mat-icon
+      >
+      <h2 class="ms-2 mb-0">
+        {{ employeeForm.get("firstName")?.value }}
+        {{ employeeForm.get("lastName")?.value }}
+      </h2>
+    </div>
+    <form [formGroup]="employeeForm">
+      <div class="card-body">
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Vorname:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="firstName" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Nachname:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="lastName" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Straße:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="street" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Postleitzahl:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="postcode" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Stadt:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="city" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Tel:</strong></p>
+          </div>
+          <div class="col-8">
+            <input formControlName="phone" class="form-control" />
+          </div>
+        </div>
+        <div class="row line">
+          <div class="col-4">
+            <p class="card-text"><strong>Fähigkeiten:</strong></p>
+          </div>
+          <div class="col-8">
+            <app-custom-qualifications-dropdown
+              [qualificationSet]="existingQualifications"
+            >
+            </app-custom-qualifications-dropdown>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-2 text-end">
+    <button class="btn" (click)="save()">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+</div>

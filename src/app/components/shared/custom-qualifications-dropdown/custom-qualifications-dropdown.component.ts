@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,21 +21,22 @@ import { EmployeeService } from '../../../services/employee.service';
     CommonModule,
     FormsModule,
     MatIconModule,
-    CustomQualificationsDropdownOptionComponent
+    CustomQualificationsDropdownOptionComponent,
   ],
   templateUrl: './custom-qualifications-dropdown.component.html',
-  styleUrl: './custom-qualifications-dropdown.component.css'
+  styleUrl: './custom-qualifications-dropdown.component.css',
 })
-export class CustomQualificationsDropdownComponent implements OnInit, OnChanges {
+export class CustomQualificationsDropdownComponent
+  implements OnInit, OnChanges
+{
   @Input() public qualificationSet?: null | Qualification[] = [];
   @Output() public select: EventEmitter<Qualification> = new EventEmitter<Qualification>();
   @Output() public create: EventEmitter<string> = new EventEmitter<string>();
   public filteredQualifications: Qualification[] = [];
   public showCount: number = 3;
-  public query: string = "";
+  public query: string = '';
 
-  constructor(private service: EmployeeService) {
-  }
+  constructor(private service: EmployeeService) {}
 
   async ngOnInit(): Promise<void> {
     await this.service.setBearer();
@@ -38,15 +47,23 @@ export class CustomQualificationsDropdownComponent implements OnInit, OnChanges 
   }
 
   search($event: any): void {
-    if(this.qualificationSet) {
+    if (this.qualificationSet) {
       let index = -1;
-      this.filteredQualifications = this.qualificationSet.filter((qualification: Qualification) => {
-        if(qualification.skill?.toLowerCase().includes(this.query.toLowerCase()) && this.query != '' && index < this.showCount) {
-          index += 1;
-          return true;
-        }
-        return false;
-      });
+      this.filteredQualifications = this.qualificationSet.filter(
+        (qualification: Qualification) => {
+          if (
+            qualification.skill
+              ?.toLowerCase()
+              .includes(this.query.toLowerCase()) &&
+            this.query != '' &&
+            index < this.showCount
+          ) {
+            index += 1;
+            return true;
+          }
+          return false;
+        },
+      );
     }
   }
 
