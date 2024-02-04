@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Qualification } from '../../../entitys/Qualification';
 
 @Component({
   selector: 'app-custom-qualifications-dropdown-option',
@@ -9,10 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './custom-qualifications-dropdown-option.component.css'
 })
 export class CustomQualificationsDropdownOptionComponent {
-  @Input() public qualificationName?: string = "";
-  @Output() public select: EventEmitter<string> = new EventEmitter<string>();
+  @Input() public qualification?: Qualification = new Qualification(-1, "Qualifikation hinzufügen");
+  @Output() public select: EventEmitter<Qualification> = new EventEmitter<Qualification>();
 
   public selectQualification(): void {
-    this.select.emit(this.qualificationName);
+    this.select.emit(this.qualification);
   }
 }

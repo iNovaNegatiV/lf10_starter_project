@@ -20,7 +20,7 @@ import { EmployeeService } from '../../../services/employee.service';
 })
 export class CustomQualificationsDropdownComponent implements OnInit, OnChanges {
   @Input() public qualificationSet?: null | Qualification[] = [];
-  @Output() public select: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public select: EventEmitter<Qualification> = new EventEmitter<Qualification>();
   @Output() public create: EventEmitter<string> = new EventEmitter<string>();
   public filteredQualifications: Qualification[] = [];
   public showCount: number = 3;
@@ -54,7 +54,7 @@ export class CustomQualificationsDropdownComponent implements OnInit, OnChanges 
     this.create.emit(this.query);
   }
 
-  selectQualification(qualificationName: string): void {
-    this.select.emit(qualificationName);
+  selectQualification(qualification: Qualification): void {
+    this.select.emit(qualification);
   }
 }
