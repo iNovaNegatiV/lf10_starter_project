@@ -92,24 +92,6 @@ export class EmployeeDetailsComponent {
     this.editing = !this.editing;
   }
 
-  getQualificationsetNames(qualificationSet: any[]): string {
-    if (!qualificationSet || qualificationSet.length === 0) {
-      return 'No qualifications';
-    }
-
-    return qualificationSet
-      .map((qualification: Qualification) => qualification.skill)
-      .join(', ');
-  }
-
-  navigateToEmployeeQualifications() {
-    this.router.navigate([
-      '/employees',
-      this.selectedEmployee.id,
-      'qualifications',
-    ]);
-  }
-
   addSkill(qualification: Qualification) {
     if (
       !this.selectedEmployee.skillSet.some(
