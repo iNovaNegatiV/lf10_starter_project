@@ -1,3 +1,11 @@
-<div class="option d-flex flex-column align-items-center justify-content-center p-3 fs-5">
-    <button class="w-100" (click)="selectQualification()">{{qualification?.skill}}</button>
+<div
+  class="option d-flex flex-column align-items-center justify-content-center p-3 fs-5"
+>
+  <button
+    class="w-100"
+    (click)="selectQualification()"
+    [ngClass]="qualification?.id == -1 ? 'small' : 'normal'"
+  >
+    {{ qualification?.skill }}
+  </button>
 </div>

@@ -1,8 +1,14 @@
 <app-background-blur [active]="active" [layer]="0" (close)="close()" />
-<div *ngIf="active" class="filter position-fixed top-50 start-50 translate-middle m-auto rounded">
+<div
+  *ngIf="active"
+  class="filter position-fixed top-50 start-50 translate-middle m-auto rounded"
+>
   <div class="d-flex flex-row align-items-center">
     <div class="w-25">
-      <button (click)="close()" class="d-flex align-items-center m-0 m-3 p-0 border-0 bg-transparent">
+      <button
+        (click)="close()"
+        class="d-flex align-items-center m-0 m-3 p-0 border-0 bg-transparent"
+      >
         <mat-icon>clear</mat-icon>
       </button>
     </div>
@@ -12,8 +18,16 @@
     <div class="d-flex flex-column">
       <p>Name</p>
       <div class="d-flex flex-row align-items-center gap-3">
-        <input [(ngModel)]="filterState.name" class="w-75" type="text" placeholder="Max Mustermann" />
-        <button (click)="clearNameFilterState()" class="d-flex align-items-center justify-content-center bg-transparent border-0">
+        <input
+          [(ngModel)]="filterState.name"
+          class="w-75"
+          type="text"
+          placeholder="Max Mustermann"
+        />
+        <button
+          (click)="clearNameFilterState()"
+          class="d-flex align-items-center justify-content-center bg-transparent border-0"
+        >
           <mat-icon>close</mat-icon>
         </button>
       </div>
@@ -24,13 +38,19 @@
         <app-custom-qualifications-dropdown
           class="w-100"
           [qualificationSet]="qualifications"
-          (select)="addQualification($event)"
+          (picked)="addQualification($event)"
           (create)="createNewQualificationByName($event)"
         />
       </div>
       <div class="qualification-set position-relative m-auto mt-5">
-        <p class="position-absolute top-50 start-50 translate-middle m-0 qualification-set-text">Qualifikationen</p>
-        <div class="d-flex flex-row flex-wrap justify-content-center w-100 p-2 gap-2">
+        <p
+          class="position-absolute top-50 start-50 translate-middle m-0 qualification-set-text"
+        >
+          Qualifikationen
+        </p>
+        <div
+          class="d-flex flex-row flex-wrap justify-content-center w-100 p-2 gap-2"
+        >
           <app-qualification-bubble
             *ngFor="let qualification of filterState.qualifications"
             [qualificationName]="qualification"
@@ -39,8 +59,6 @@
         </div>
       </div>
     </div>
-    <button (click)="submitFilter()">
-      Filtern
-    </button>
+    <button (click)="submitFilter()">Filtern</button>
   </div>
 </div>

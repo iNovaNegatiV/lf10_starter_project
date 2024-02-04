@@ -1,3 +1,7 @@
 .border-dotted {
   border: 4px dotted black;
 }
+
+a, a:active, a:visited, a:focus {
+  color: black;
+}

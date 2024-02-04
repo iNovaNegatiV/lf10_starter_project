@@ -84,8 +84,6 @@ export class EmployeeCreateComponent {
     }
     this.newEmployee.skillSet.push(qualification.id as number);
     this.selectedQualifications.push(qualification.skill as string);
-    console.log(this.newEmployee.skillSet);
-    console.log(qualification);
   }
 
   async createQualification(skill: string) {
