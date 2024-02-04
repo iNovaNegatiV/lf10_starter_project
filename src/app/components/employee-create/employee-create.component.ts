@@ -56,6 +56,12 @@ export class EmployeeCreateComponent {
   }
 
   save() {
+    let postcode = this.employeeForm.get('postcode')?.value;
+    if (postcode && !/^\d{5}$/.test(postcode)) {
+      alert('Postcode must be 5 digits');
+      return;
+    }
+
     if (this.employeeForm.valid) {
       this.newEmployee = {
         firstName: this.employeeForm.value.firstName || undefined,
@@ -82,8 +88,10 @@ export class EmployeeCreateComponent {
     if (!this.newEmployee.skillSet) {
       this.newEmployee.skillSet = [];
     }
-    this.newEmployee.skillSet.push(qualification.id as number);
-    this.selectedQualifications.push(qualification.skill as string);
+    if (!this.newEmployee.skillSet.includes(qualification.id as number)) {
+      this.newEmployee.skillSet.push(qualification.id as number);
+      this.selectedQualifications.push(qualification.skill as string);
+    }
   }
 
   async createQualification(skill: string) {
