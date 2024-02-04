@@ -1,16 +1,27 @@
 <div class="d-flex flex-column m-4">
   <h2 class="">Übersicht</h2>
-  <button class="align-self-end bg-transparent"><a routerLink="/qualifications">Fähigkeiten</a></button>
+  <button class="align-self-end bg-transparent">
+    <a routerLink="/qualifications">Fähigkeiten</a>
+  </button>
   <div class="d-flex flex-row w-100 pt-3 pb-3">
-    <button (click)="activateFilter()" class="d-flex flex-row align-items-center justify-content-center bg-transparent w-25">
-      <p class="m-0">Filter</p><mat-icon class="fs-1">keyboard_arrow_down</mat-icon>
+    <button
+      (click)="activateFilter()"
+      class="d-flex flex-row align-items-center justify-content-center bg-transparent w-25"
+    >
+      <p class="m-0">Filter</p>
+      <mat-icon class="fs-1">keyboard_arrow_down</mat-icon>
     </button>
     <div class="flex-fill"></div>
-    <button class="d-flex align-items-center justify-content-center bg-transparent" (click)="navigateToCreateEmployee()">
+    <button
+      class="d-flex align-items-center justify-content-center bg-transparent"
+      (click)="navigateToCreateEmployee()"
+    >
       <mat-icon>person_add</mat-icon>
     </button>
   </div>
-  <div class="d-flex flex-column border-dotted text-light bg-secondary p-2 w-100 m-auto">
+  <div
+    class="d-flex flex-column text-light bg-secondary p-4 rounded border border-dark border-2 w-100 m-auto"
+  >
     <app-employee-entry
       *ngFor="let employee of getEmployees()"
       [employee]="employee"

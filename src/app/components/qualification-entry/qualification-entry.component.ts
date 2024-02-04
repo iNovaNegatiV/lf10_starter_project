@@ -8,13 +8,20 @@ import { Qualification } from '../../entitys/Qualification';
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './qualification-entry.component.html',
-  styleUrl: './qualification-entry.component.css'
+  styleUrl: './qualification-entry.component.css',
 })
 export class QualificationEntry {
   @Input() qualification?: Qualification;
-  @Output() delete: EventEmitter<Qualification> = new EventEmitter<Qualification>();
+  @Output() delete: EventEmitter<Qualification> =
+    new EventEmitter<Qualification>();
+  @Output() edit: EventEmitter<Qualification> =
+    new EventEmitter<Qualification>();
 
   public deleteQualification(): void {
     this.delete.emit(this.qualification);
+  }
+
+  public startEditing(): void {
+    this.edit.emit(this.qualification);
   }
 }

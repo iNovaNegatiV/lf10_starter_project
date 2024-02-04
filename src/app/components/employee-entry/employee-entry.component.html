@@ -1,8 +1,14 @@
-<div class="d-flex flex-row border-dotted p-2 mt-1">
-  <button (click)="showDetails()" class="d-flex flex-fill align-items-center bg-transparent border-0 text-light">
-    <p class="p-2 m-0">{{employee?.firstName}} {{employee?.lastName}}</p>
+<div class="d-flex flex-row rounded p-2 mt-1 bg-light">
+  <button
+    (click)="showDetails()"
+    class="d-flex flex-fill align-items-center bg-transparent border-0"
+  >
+    <p class="p-2 m-0">{{ employee?.firstName }} {{ employee?.lastName }}</p>
   </button>
-  <button (click)="deleteEmployee()" class="d-flex align-items-center text-center bg-transparent border-0">
+  <button
+    (click)="deleteEmployee()"
+    class="d-flex align-items-center text-center bg-transparent border-0"
+  >
     <mat-icon>delete</mat-icon>
   </button>
 </div>
