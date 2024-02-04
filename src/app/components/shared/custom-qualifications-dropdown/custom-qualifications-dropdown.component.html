@@ -7,13 +7,12 @@
         <app-custom-qualifications-dropdown-option
             *ngIf="query != '' && filteredQualifications.length < 1"
             class="w-100"
-            [qualificationName]="'Qualifikation hinzufügen'"
             (select)="createQualification()"
         />
         <app-custom-qualifications-dropdown-option
             class="w-100"
             *ngFor="let qualification of filteredQualifications;"
-            [qualificationName]="qualification.skill"
+            [qualification]="qualification"
             (select)="selectQualification($event)"
         />
     </div>

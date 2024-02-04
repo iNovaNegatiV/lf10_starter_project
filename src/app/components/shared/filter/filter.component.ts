@@ -47,16 +47,16 @@ export class FilterComponent implements OnInit {
     await this.fetchData();
   }
 
-  addQualification(qualificationName: string): void {
+  addQualification(originalQualification: Qualification): void {
     const foundQualifications: Qualification[] = this.qualifications.filter((qualification: Qualification) => {
-      if(qualification.skill == qualificationName) {
+      if(qualification.skill == originalQualification.skill) {
         return true;
       }
       return false;
     });
 
-    if(foundQualifications.length > 0 && !this.filterState.qualifications.includes(qualificationName)) {
-      this.filterState.qualifications.push(qualificationName);
+    if(originalQualification.skill && foundQualifications.length > 0 && !this.filterState.qualifications.includes(originalQualification.skill)) {
+      this.filterState.qualifications.push(originalQualification.skill);
     }
   }
 
