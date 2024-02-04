@@ -1,4 +1,7 @@
-a, a:active, a:focus, a:visited {
+a,
+a:active,
+a:focus,
+a:visited {
   color: #b83333;
 }
 

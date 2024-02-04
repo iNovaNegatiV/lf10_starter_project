@@ -16,12 +16,12 @@ import { CommonModule } from '@angular/common';
 export class EmployeeSkillDetailsComponent {
   destroy$ = new Subject();
   @Input() selectedEmployee: Employee = new Employee();
-  @Input() editing:boolean = false;
+  @Input() editing: boolean = false;
 
   constructor(
     private router: Router,
     private employeeService: EmployeeService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.employeeService.selectedEmployee$.subscribe((employee) => {
@@ -42,13 +42,13 @@ export class EmployeeSkillDetailsComponent {
   }
 
   deleteEmployeeQualification(skill?: string) {
-    if(skill) {
+    if (skill) {
       this.employeeService
-      .deleteEmployeeQualification(skill)
-      .subscribe((data) => {
-        this.selectedEmployee.skillSet = data.skillSet;
-        this.employeeService.setSelectEmployee(this.selectedEmployee);
-      });
+        .deleteEmployeeQualification(skill)
+        .subscribe((data) => {
+          this.selectedEmployee.skillSet = data.skillSet;
+          this.employeeService.setSelectEmployee(this.selectedEmployee);
+        });
     }
   }
 }

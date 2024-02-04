@@ -5,12 +5,9 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'text-media-content',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
   templateUrl: './text-media.component.html',
-  styleUrl: './text-media.component.css'
+  styleUrl: './text-media.component.css',
 })
 export class TextMediaComponent {
   @Input() headline?: string;
@@ -33,7 +30,11 @@ export class TextMediaComponent {
   }
 
   private isMobile(): boolean {
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      )
+    ) {
       return true;
     }
     return false;

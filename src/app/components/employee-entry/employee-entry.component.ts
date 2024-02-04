@@ -8,7 +8,7 @@ import { Employee } from '../../entitys/Employee';
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './employee-entry.component.html',
-  styleUrl: './employee-entry.component.css'
+  styleUrl: './employee-entry.component.css',
 })
 export class EmployeeEntry {
   @Input() employee?: Employee;
@@ -20,6 +20,8 @@ export class EmployeeEntry {
   }
 
   public deleteEmployee(): void {
-    this.delete.emit(this.employee?.id);
+    if (window.confirm('Mitarbeiter wirklich löschen?')) {
+      this.delete.emit(this.employee?.id);
+    }
   }
 }

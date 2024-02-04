@@ -17,25 +17,28 @@ import { QualificationBubbleComponent } from '../qualification-bubble/qualificat
     MatIconModule,
     BackgroundBlurComponent,
     QualificationBubbleComponent,
-    CustomQualificationsDropdownComponent
+    CustomQualificationsDropdownComponent,
   ],
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.css'
+  styleUrl: './filter.component.css',
 })
 export class FilterComponent implements OnInit {
   @Input() active: boolean = false;
-  @Input() filterState: {name: string, qualifications: string[]} = {name: '', qualifications: []};
-  @Output() filter: EventEmitter<{name: string, qualifications: string[]}> = new EventEmitter();
+  @Input() filterState: { name: string; qualifications: string[] } = {
+    name: '',
+    qualifications: [],
+  };
+  @Output() filter: EventEmitter<{ name: string; qualifications: string[] }> =
+    new EventEmitter();
   @Output() closeFilter: EventEmitter<boolean> = new EventEmitter();
 
   qualifications: Qualification[] = [];
 
-  constructor(private service: EmployeeService) {
-  }
+  constructor(private service: EmployeeService) {}
 
   async ngOnInit(): Promise<void> {
-      await this.service.setBearer();
-      await this.fetchData();
+    await this.service.setBearer();
+    await this.fetchData();
   }
 
   async fetchData(): Promise<void> {
@@ -48,27 +51,33 @@ export class FilterComponent implements OnInit {
   }
 
   addQualification(originalQualification: Qualification): void {
-    const foundQualifications: Qualification[] = this.qualifications.filter((qualification: Qualification) => {
-      if(qualification.skill == originalQualification.skill) {
-        return true;
-      }
-      return false;
-    });
+    const foundQualifications: Qualification[] = this.qualifications.filter(
+      (qualification: Qualification) => {
+        if (qualification.skill == originalQualification.skill) {
+          return true;
+        }
+        return false;
+      },
+    );
 
-    if(originalQualification.skill && foundQualifications.length > 0 && !this.filterState.qualifications.includes(originalQualification.skill)) {
+    if (
+      originalQualification.skill &&
+      foundQualifications.length > 0 &&
+      !this.filterState.qualifications.includes(originalQualification.skill)
+    ) {
       this.filterState.qualifications.push(originalQualification.skill);
     }
   }
 
   removeQualification(qualificationName: string): void {
-    if(this.filterState.qualifications.includes(qualificationName)) {
+    if (this.filterState.qualifications.includes(qualificationName)) {
       const index = this.filterState.qualifications.indexOf(qualificationName);
       this.filterState.qualifications.splice(index, 1);
     }
   }
 
   clearNameFilterState(): void {
-    this.filterState.name = "";
+    this.filterState.name = '';
   }
 
   submitFilter(): void {

@@ -2,6 +2,9 @@
   border: 4px dotted black;
 }
 
-a, a:active, a:visited, a:focus {
+a,
+a:active,
+a:visited,
+a:focus {
   color: black;
 }

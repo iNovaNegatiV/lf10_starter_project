@@ -2,11 +2,11 @@
   background-color: transparent;
   z-index: 1;
   height: 0;
-  transition: background .5s ease;
+  transition: background 0.5s ease;
 }
 
 .blur-active {
   height: 100vh !important;
-  background-color: rgba(0, 0, 0, .75) !important;
+  background-color: rgba(0, 0, 0, 0.75) !important;
   backdrop-filter: blur(5px) !important;
 }
