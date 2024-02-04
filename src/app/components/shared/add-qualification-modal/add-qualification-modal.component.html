@@ -1,0 +1,10 @@
+<div *ngIf="open" class="w-100 m-auto bg-light p-4">
+  <div class="w-100 d-flex flex-column justify-content-center align-items-start">
+    <button class="bg-transparent border-0 p-0 m-1" (click)="cancelModalProgress()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <p class="mt-2">Qualifikation</p>
+    <input [(ngModel)]="suggestion" type="text" placeholder="Qualifikation">
+    <button class="add-qualification mt-3 border-0 m-0 p-2 rounded text-light" (click)="addQualification()">Qualifikation erstellen</button>
+  </div>
+</div>
