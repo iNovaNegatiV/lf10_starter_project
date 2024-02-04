@@ -95,6 +95,7 @@ export class EmployeeService {
         postcode: employee.postcode,
         city: employee.city,
         phone: employee.phone,
+        skillSet: this.getSkillIds(employee.skillSet ?? [])
       },
       {
         headers: this.getHeaders(),
@@ -112,5 +113,27 @@ export class EmployeeService {
         resolve(data);
       });
     });
+  }
+
+  deleteEmployeeQualification(skill: string): Observable<any> {
+    return this.http.delete<any>(
+      this.baseUrl + 'employees/' + this.selectedEmployeeSubject.value?.id + '/qualifications/',
+      {
+        headers: this.getHeaders(),
+        body: {
+          skill: skill
+        }
+      },
+    );
+  }
+
+  getEmployee(id: string): Observable<Employee> {
+    return this.http.get<Employee>(this.baseUrl + 'employees/' + id, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  getSkillIds(skillSet: { id: number; skill: string }[]): number[] {
+    return skillSet.map(skill => skill.id);
   }
 }

@@ -4,15 +4,16 @@ import { EmployeeService } from '../../services/employee.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Qualification } from '../../entitys/Qualification';
+import { EmployeeSkillDetailsComponent } from "../employee-skill-details/employee-skill-details.component";
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [MatIconModule, FormsModule, CommonModule],
+  imports: [MatIconModule, FormsModule, CommonModule, EmployeeSkillDetailsComponent],
   templateUrl: './employee-details.component.html',
   styleUrl: './employee-details.component.css',
 })
@@ -25,16 +26,28 @@ export class EmployeeDetailsComponent {
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-  ) {}
+    private route: ActivatedRoute,
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.employeeService.setBearer();
     this.employeeService.selectedEmployee$
       .pipe(takeUntil(this.destroy$))
       .subscribe((employee) => {
+        console.log(employee);
         if (employee == null) {
+          const employeeId = this.route.snapshot.paramMap.get('id');
+          if (employeeId) {
+            this.employeeService.getEmployee(employeeId)
+              .pipe(takeUntil(this.destroy$))
+              .subscribe((employee) => {
+                this.selectedEmployee = employee;
+                this.employeeService.setSelectEmployee(employee);
+              });
+          }
           return;
         }
-
+  
         this.selectedEmployee = employee;
 
         // Fetch qualifications for the selected employee
@@ -50,7 +63,6 @@ export class EmployeeDetailsComponent {
   }
 
   ngOnDestroy() {
-    this.employeeService.setSelectEmployee(null);
     this.destroy$.next(true);
     this.destroy$.complete();
   }
@@ -80,6 +92,6 @@ export class EmployeeDetailsComponent {
   }
 
   navigateToEmployeeQualifications() {
-    //this.router.navigate([]);
+    this.router.navigate(['/employees', this.selectedEmployee.id, 'qualifications']);
   }
 }
